@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block title %}Sign in{% endblock %}
+{% block breadcrumb %}Sign in{% endblock %}
+{% block content %}<section class="login-panel panel"><span class="empty-icon">{{ ui.icon('building') }}</span><p class="eyebrow teal">WELCOME TO GRANTIQ</p><h1>Ready to make an impact?</h1><p class="lede">Sign in to your organization's grant workspace.</p><form action="/login" method="post" class="stack-form"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><label>Workspace password<input type="password" name="password" autocomplete="current-password" required autofocus></label><button class="button button-primary full-width" type="submit">Sign in {{ ui.icon('arrow') }}</button></form><p class="small muted">Your administrator manages the workspace password.</p></section>{% endblock %}

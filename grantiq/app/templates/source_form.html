@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Edit' if managed_source else 'Add' }} funding source{% endblock %}
+{% block breadcrumb %}<a href="/sources">Data sources</a> / {{ 'Edit' if managed_source else 'Add' }} source{% endblock %}
+{% block content %}
+<a class="back-link" href="/sources">← Back to data sources</a>
+<section class="page-heading"><div><p class="eyebrow teal">EXPAND YOUR FUNDING SEARCH</p><h1>{{ 'Edit your funding source.' if managed_source else 'Add a trusted funding page.' }}</h1><p class="lede">Add one public opportunity page from a foundation, company, state, or local funder.</p></div></section>
+<form action="/sources/save" method="post" class="panel stack-form source-editor">
+<input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="source_id" value="{{ managed_source.id if managed_source else '' }}">
+<div class="form-grid two"><label>Funding organization<input name="name" value="{{ managed_source.name if managed_source else '' }}" required maxlength="200"></label><label>Public opportunity URL<input name="url" type="url" value="{{ managed_source.url if managed_source else '' }}" placeholder="https://foundation.org/grants/opportunity" required><small>Use a page describing a single opportunity, rather than a list of unrelated grants.</small></label></div>
+<div class="concerns"><h4>{{ ui.icon('info') }} Approve the source before collection</h4><p>Review the website's terms and confirm that automated access to this public page is permitted. GrantIQ also checks robots rules and refuses login pages, challenges, and private network addresses.</p></div>
+<label class="checkbox-label"><input type="checkbox" name="terms_reviewed" value="yes" {% if managed_source and managed_source.terms_reviewed %}checked{% endif %}> I reviewed the website's terms and approved automated access to this public opportunity page.</label>
+<div class="form-grid two"><label>Reviewed by<input name="reviewed_by" value="{{ managed_source.reviewed_by if managed_source else '' }}" maxlength="200" placeholder="Your name"></label><label>Terms or permission reference (optional)<input type="url" name="terms_reference" value="{{ managed_source.terms_reference if managed_source else '' }}" placeholder="https://foundation.org/terms"></label></div>
+<label class="checkbox-label"><input type="checkbox" name="enabled" value="yes" {% if managed_source and managed_source.enabled %}checked{% endif %}> Include this source in the next grant refresh.</label>
+<details class="text-details"><summary>Advanced: identify fields on the source page</summary><p>For administrators configuring a page layout. Without these rules, GrantIQ reads the heading and main text, leaving unconfirmed details for staff review. Use CSS selectors in the JSON object below.</p><label>Extraction rules<textarea name="selectors" rows="10" spellcheck="false">{{ managed_source.selectors|tojson(indent=2) if managed_source else '{}' }}</textarea><small>Supported keys: title, description, eligibility, deadline, award_min, award_max, application_url, applicant_types, geography, geography_scope, populations, categories, programs, grant_status. List selectors can match multiple elements. Scope/status selectors must contain a recognized exact value.</small></label></details>
+<div class="button-group"><button class="button button-primary" type="submit">{{ ui.icon('check') }} Save source</button><a class="button button-secondary" href="/sources">Cancel</a></div>
+</form>
+{% endblock %}

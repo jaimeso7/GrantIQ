@@ -1,0 +1,22 @@
+# Optional approved public pages. Grants.gov uses its official API independently.
+# Every entry must identify ONE opportunity page. There is no link-following crawl.
+# Administrators must review the actual website terms before enabling retrieval.
+# Missing or disallowed robots.txt, redirects, login/challenges, or private network
+# addresses prevent ingestion. Unconfirmed scraped fields always need review.
+sources: []
+
+# Example configuration only. Replace URL/selectors with a real approved source.
+# sources:
+#   - name: Example Foundation
+#     url: https://example.org/grants/community-health
+#     parser: generic
+#     enabled: false
+#     terms_reviewed: false
+#     selectors:
+#       title: h1
+#       description: main
+#       eligibility: .eligibility
+#       deadline: time.application-deadline
+#       award_min: .award-min
+#       award_max: .award-max
+#       application_url: a.apply

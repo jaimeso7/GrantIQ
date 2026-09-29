@@ -1,0 +1,11 @@
+<section class="search-monitor" aria-label="Recurring grant discovery">
+  <div class="monitor-heading"><div><p class="eyebrow">AUTOMATIC DISCOVERY</p><h2 data-search-status>{{ search_schedule.status }}</h2></div><a class="text-link" href="/sources#search-schedule">Manage schedule {{ ui.icon('arrow') }}</a></div>
+  <div class="monitor-grid">
+    <div><span>Search frequency</span><strong data-search-frequency>{{ 'Every ' ~ search_schedule.interval_hours ~ ' hours' if search_schedule.enabled else 'Paused' }}</strong></div>
+    <div><span>Next search</span><strong data-search-next>{{ search_schedule.next_run_at|datetimefmt if search_schedule.enabled else 'Schedule paused' }}</strong></div>
+    <div><span>Latest search</span><strong data-search-last>{{ search_schedule.latest.started_at|datetimefmt if search_schedule.latest else 'First search pending' }}</strong></div>
+    <div><span>Latest result</span><strong data-search-result>{% if search_schedule.latest %}{{ search_schedule.latest.status|capitalize }} · {{ search_schedule.latest.added }} new · {{ search_schedule.latest.updated }} updated{% else %}No search completed yet{% endif %}</strong></div>
+  </div>
+  <p class="monitor-message" data-search-message>{% if not search_schedule.worker_alive %}The search worker has not checked in. Scheduled searches need the app server running.{% elif search_schedule.latest and search_schedule.latest.status == 'partial' %}Partial coverage. Some sources failed or the search reached its record limit. See search history for details.{% else %}Searches continue while the app server runs, even when this browser is closed.{% endif %}</p>
+  <a href="/" data-search-results-link hidden>New search results are available. View updated opportunities →</a>
+</section>

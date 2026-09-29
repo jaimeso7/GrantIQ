@@ -1,0 +1,31 @@
+{% import 'macros.html' as ui %}
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#ffffff"><meta name="description" content="GrantIQ helps your nonprofit discover, understand, and prioritize public grant opportunities."><title>{% block title %}Discover opportunities{% endblock %} · GrantIQ</title><link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}?v=20260923"></head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<aside class="sidebar">
+  <a class="brand" href="/" aria-label="GrantIQ home"><span class="brand-mark">{{ ui.icon('spark') }}</span><span>Grant<span class="brand-light">IQ</span><span class="brand-dot">.</span></span></a>
+  <div class="workspace"><span class="workspace-avatar">{{ ui.icon('building') }}</span><div><small>YOUR ORGANIZATION</small><strong>{{ profile.name }}</strong></div></div>
+  <a class="nav-item" href="/sprint-review">{{ ui.icon('grid') }}<span>Sprint review</span></a>
+  <p class="nav-label">WORKSPACE</p>
+  <nav aria-label="Main navigation">
+    <a href="/" class="nav-item {% if page == 'dashboard' or page == 'detail' %}active{% endif %}" {% if page == 'dashboard' %}aria-current="page"{% endif %}>{{ ui.icon('grid') }}<span>Discover grants</span>{% if page == 'dashboard' %}<span class="nav-dot"></span>{% endif %}</a>
+    <a href="/pipeline" class="nav-item {% if page == 'pipeline' %}active{% endif %}" {% if page == 'pipeline' %}aria-current="page"{% endif %}>{{ ui.icon('bookmark') }}<span>My pipeline</span></a>
+    <a href="/research" class="nav-item {% if page == 'research' %}active{% endif %}">{{ ui.icon('search') }}<span>Team research</span></a>
+    <a href="/sources" class="nav-item {% if page == 'sources' %}active{% endif %}" {% if page == 'sources' %}aria-current="page"{% endif %}>{{ ui.icon('database') }}<span>Data sources</span></a>
+    <a href="/settings" class="nav-item {% if page == 'settings' %}active{% endif %}" {% if page == 'settings' %}aria-current="page"{% endif %}>{{ ui.icon('settings') }}<span>Organization profile</span></a>
+  </nav>
+  <div class="sidebar-bottom"><div class="mission-note"><span class="tiny-spark">{{ ui.icon('spark') }}</span><p>A little clarity.<br><strong>A bigger impact.</strong></p><span>Grant discovery built around your mission.</span></div><div class="sidebar-footer"><span class="online-dot"></span><span>Free to find your next opportunity</span></div>{% if auth_enabled %}{% if authenticated %}<form action="/logout" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="logout-button" type="submit">{{ ui.icon('logout') }} Sign out</button></form>{% else %}<a class="logout-button" href="/login">Sign in</a>{% endif %}{% endif %}</div>
+</aside>
+<div class="main-shell">
+  <header class="topbar"><span class="breadcrumb">Workspace <span>/</span> {% block breadcrumb %}Discover grants{% endblock %}</span><div class="topbar-right"><span class="topbar-tag">MISSION-DRIVEN FUNDING</span><span class="user-avatar" aria-label="Organization">{{ profile.name[:1]|upper }}</span></div></header>
+  <main id="main" class="main-content">
+    {% if authenticated %}<div class="search-strip"><span class="search-indicator" aria-hidden="true"></span><a href="/sources#search-schedule">Automatic search: <strong data-search-status>{{ search_schedule.status }}</strong></a><span data-search-frequency>{{ 'Every ' ~ search_schedule.interval_hours ~ ' hours' if search_schedule.enabled else 'Paused' }}</span></div>{% endif %}
+    {% if notice %}<div class="notice" role="status">{{ ui.icon('info') }}<span>{{ notice }}</span></div>{% endif %}
+    {% block content %}{% endblock %}
+    <footer class="main-footer"><span>GrantIQ <span class="footer-divider">/</span> More opportunity. More impact.</span><span>Verify eligibility and deadlines with the official funder.</span></footer>
+  </main>
+</div>
+{% if authenticated %}<script src="{{ url_for('static', path='/refresh.js') }}?v=20260923" defer></script>{% endif %}
+</body></html>

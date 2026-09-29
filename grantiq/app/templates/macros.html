@@ -1,0 +1,68 @@
+{% macro icon(name, cls='') -%}
+<svg class="icon {{ cls }}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+{% if name == 'grid' %}<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
+{% elif name == 'search' %}<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>
+{% elif name == 'arrow' %}<path d="M5 12h14m-6-6 6 6-6 6"/>
+{% elif name == 'external' %}<path d="M14 3h7v7m0-7L10 14M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/>
+{% elif name == 'refresh' %}<path d="M20 7v5h-5M4 17v-5h5"/><path d="M6 6a8 8 0 0 1 13 2l1 4M4 12l1 4a8 8 0 0 0 13 2"/>
+{% elif name == 'filter' %}<path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2" fill="currentColor"/><circle cx="15" cy="17" r="2" fill="currentColor"/>
+{% elif name == 'calendar' %}<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18m-13 5h2"/>
+{% elif name == 'bookmark' %}<path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16l-6-4-6 4Z"/>
+{% elif name == 'database' %}<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/>
+{% elif name == 'settings' %}<path d="M4 7h16M4 17h16"/><circle cx="8" cy="7" r="3" fill="var(--sidebar-bg, #fff)"/><circle cx="16" cy="17" r="3" fill="var(--sidebar-bg, #fff)"/>
+{% elif name == 'spark' %}<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/>
+{% elif name == 'download' %}<path d="M12 3v12m-5-5 5 5 5-5M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/>
+{% elif name == 'check' %}<path d="m5 12 4 4L19 6"/>
+{% elif name == 'info' %}<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/>
+{% elif name == 'pin' %}<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/>
+{% elif name == 'building' %}<path d="M4 21V8l8-5 8 5v13M2 21h20M8 10h1m6 0h1m-8 4h1m6 0h1m-6 7v-4h4v4"/>
+{% elif name == 'chevron' %}<path d="m9 5 7 7-7 7"/>
+{% elif name == 'logout' %}<path d="M9 3H4v18h5M9 12h12m-5-5 5 5-5 5"/>
+{% endif %}</svg>
+{%- endmacro %}
+
+{% macro badge(label) -%}<span class="badge badge-{{ label|lower|replace(' ', '-') }}">{{ label }}</span>{%- endmacro %}
+
+{% macro amount(record) -%}
+{% if record.award_min is not none and record.award_max is not none %}{% if record.award_min == record.award_max %}{{ record.award_min|money }}{% else %}{{ record.award_min|money }}–{{ record.award_max|money }}{% endif %}
+{% elif record.award_max is not none %}Up to {{ record.award_max|money }}
+{% elif record.award_min is not none %}From {{ record.award_min|money }}
+{% elif record.estimated_award is not none %}Est. {{ record.estimated_award|money }}
+{% else %}Amount unknown{% endif %}
+{%- endmacro %}
+
+{% macro yesno(value) -%}{% if value is sameas true %}Yes{% elif value is sameas false %}No{% else %}<span class="muted">Unknown · review source</span>{% endif %}{%- endmacro %}
+
+{% macro list_text(values) -%}{{ values|join(', ') if values else 'Unknown' }}{%- endmacro %}
+
+{% macro grant_card(grant) %}
+{% set record = grant.record %}{% set assessment = grant.assessment %}
+<article class="grant-card">
+  <div class="fit-block {% if assessment.eligibility_status == 'Ineligible' %}fit-block-muted{% endif %}">
+    <span class="fit-value">{{ assessment.fit_score|score }}</span><span class="fit-caption">FIT SCORE</span>
+  </div>
+  <div class="grant-content">
+    <div class="grant-topline"><span class="eyebrow">{{ record.funder_name or 'Funder unknown' }}</span><div class="badge-group">{% if record.is_demo %}<span class="badge badge-demo">Demo data</span>{% endif %}{{ badge(assessment.recommendation) }}{% if record.grant_status == 'forecasted' %}{{ badge('Forecasted') }}{% endif %}{% if grant.pipeline %}<span class="badge badge-neutral">{{ icon('bookmark') }} {{ grant.pipeline.status }}</span>{% endif %}</div></div>
+    <h3><a href="/grants/{{ grant.id }}">{{ record.grant_title }}</a></h3>
+    <div class="grant-facts"><span class="grant-amount">{{ amount(record) }}</span><span>{{ icon('calendar') }} {% if record.deadline %}{{ 'Est. due' if record.grant_status == 'forecasted' else 'Due' }} {{ record.deadline|datefmt }}{% else %}{{ record.deadline_text or 'Deadline unknown' }}{% endif %}</span><span>{{ icon('pin') }} {{ list_text(record.geographic_restrictions) }}</span></div>
+    <p class="match-reason"><span class="reason-icon">{{ icon('spark') }}</span>{{ assessment.match_explanation[0] if assessment.match_explanation else 'More information is needed to explain this match. Review the official source.' }}</p>
+    <div class="grant-bottom"><div class="grant-attributes">{{ badge(assessment.eligibility_status) }}<span class="confidence">{{ assessment.confidence_score|score }}% data confidence</span>{% if record.categories %}<span class="category-label">{{ record.categories[:2]|join(' · ') }}</span>{% endif %}</div><a class="text-link" href="/grants/{{ grant.id }}">View opportunity {{ icon('arrow') }}</a></div>
+    {% if assessment.warnings %}<p class="card-concern">{{ icon('info') }} {{ assessment.warnings[0] }}</p>{% endif %}
+    {% if grant.staff_context %}<p class="card-concern"><strong>Staff decision: {{ grant.staff_context.label }}.</strong> {{ grant.staff_context.reason }}</p>{% endif %}<div class="grant-source">{{ record.source }} <span>·</span> Checked {{ record.last_checked|datefmt }}{% if record.populations_served %}<span>·</span> {{ record.populations_served[:3]|join(', ') }}{% endif %}</div>
+  </div>
+</article>
+{% endmacro %}
+
+{% macro pipeline_form(grant, statuses, csrf_token) %}
+{% set saved = grant.pipeline or {} %}
+<form action="/grants/{{ grant.id }}/pipeline" method="post" class="stack-form">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Status<select name="status">{% for status in statuses %}<option value="{{ status }}" {% if saved.get('status', 'Discovered') == status %}selected{% endif %}>{{ status }}</option>{% endfor %}</select></label>
+  <label>Assigned to<input name="assigned_to" value="{{ saved.get('assigned_to') or '' }}" maxlength="200" placeholder="Team member's name"></label>
+  <label>Requested amount ($)<input type="number" name="requested_amount" value="{{ saved.get('requested_amount') if saved.get('requested_amount') is not none else '' }}" min="0" step="0.01" placeholder="Not set"></label>
+  <div class="form-grid two"><label>Application deadline<input type="date" name="application_deadline" value="{{ saved.get('application_deadline') or '' }}"></label><label>Submission date<input type="date" name="submission_date" value="{{ saved.get('submission_date') or '' }}"></label></div>
+  <label>Notes<textarea name="notes" rows="4" placeholder="Capture your research and next steps…">{{ saved.get('notes') or '' }}</textarea></label>
+  <label>Final result<textarea name="final_result" rows="2" placeholder="Award outcome, feedback, or follow-up">{{ saved.get('final_result') or '' }}</textarea></label>
+  <button class="button button-primary full-width" type="submit">{{ icon('bookmark') }} {{ 'Update pipeline' if grant.pipeline else 'Save to pipeline' }}</button>
+</form>
+{% endmacro %}

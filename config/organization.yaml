@@ -1,0 +1,51 @@
+# Editable starting profile. Summarized from the organization's official pages,
+# checked 2026-09-14. Financial capacity and funder relationships are unknown.
+name: Vision Is Priceless
+organization_type: 501(c)(3)
+mission: Improve access to preventive eye care and treatment for underserved children and adults in Northeast Florida.
+description: A charitable vision-care organization providing screenings, eye examinations, prescription eyewear, and specialist care to people facing barriers to care.
+service_locations:
+  - Northeast Florida
+  - Jacksonville, Florida
+populations_served:
+  - children
+  - adults
+  - uninsured people
+  - low-income people
+programs:
+  - school-based vision care
+  - adult vision screening and eye care
+  - cataract surgery access
+funding_interests:
+  - vision care
+  - eye health
+  - preventive healthcare
+  - healthcare access
+  - children's health
+  - adult health
+  - youth services
+  - education
+  - school readiness
+  - disability and accessibility
+  - healthy aging
+  - workforce development
+  - community health
+minimum_desired_award: 5000
+maximum_desired_award: null
+ein: 59-3386495
+annual_budget: null
+minimum_days_to_apply: 7
+matching_funds_available: null
+has_fiscal_sponsor: null
+invited_by_funders: []
+existing_funder_relationships: []
+weights:
+  mission: 30
+  geography: 20
+  population: 15
+  funding: 10
+  program: 10
+  past_giving: 10
+  readiness: 5
+readiness_thresholds: [45, 30, 15]
+profile_source_url: https://visionispriceless.org/about-us/
