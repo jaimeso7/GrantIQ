@@ -5,6 +5,12 @@ __pycache__/
 .env
 .env.*
 !.env.example
+!.env.node.example
+node_modules/
+node-coverage/
+siteground-package/
+LOCAL-HOSTING.md
+Launch-GrantIQ.cmd
 data/
 *.db
 *.db-shm
