@@ -59,9 +59,13 @@ export function security(app, config) {
         }
       }
     }
-    const publicPath = ['/health', '/login', '/static/node.css', '/static/node.js'].includes(
-      req.path,
-    );
+    const publicPath = [
+      '/health',
+      '/login',
+      '/static/original.css',
+      '/static/node.css',
+      '/static/node.js',
+    ].includes(req.path);
     if (config.password && !req.session.auth && !publicPath) {
       if (req.path.startsWith('/api/')) return res.status(401).json({ error: 'Sign in required.' });
       return res.redirect(303, '/login');

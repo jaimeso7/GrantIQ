@@ -59,6 +59,8 @@ export function initialState() {
 // One transactional workspace document is intentional for the bounded MVP.
 // PostgreSQL row locks serialize updates across processes; never use filesystem state in production.
 export async function createStore(config, seed = initialState) {
+  // Hosted instances share PostgreSQL; local development uses a separate SQLite file.
+  // The queue serializes this process, while row/SQLite locks protect other processes.
   let pool, sqlite;
   let queue = Promise.resolve();
   if (config.databaseUrl) {
@@ -93,6 +95,8 @@ export async function createStore(config, seed = initialState) {
     return JSON.parse(sqlite.prepare('SELECT payload FROM workspace WHERE id=1').get().payload);
   }
   function update(fn) {
+    // Mutators receive a private parsed document. Commit only if they finish successfully;
+    // throwing rolls back both source changes and staff edits in the same transaction.
     const task = queue.then(async () => {
       if (pool) {
         const c = await pool.connect();
@@ -144,6 +148,7 @@ export async function createStore(config, seed = initialState) {
       else sqlite.close();
     },
     async acquireLease({ scheduled = false } = {}) {
+      // Recheck due time under the write lock: a second replica may have just completed.
       const token = randomUUID();
       return update((s) => {
         if (scheduled && (!s.schedule.enabled || s.schedule.next_run_at > now())) return null;

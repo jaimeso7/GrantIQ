@@ -1,6 +1,6 @@
 import { configuration } from '../config.js';
 import { createStore } from '../store.js';
-import { createDiscovery } from '../service.js';
+import { createDiscovery } from '../discovery.js';
 const config = configuration();
 const store = await createStore(config);
 try {

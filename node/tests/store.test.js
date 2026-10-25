@@ -1,7 +1,8 @@
+import { createDiscovery } from '../discovery.js';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { tempStore, record } from './helpers.js';
-import { upsert, createDiscovery, filterGrants, views } from '../service.js';
+import { upsert, filterGrants, views } from '../service.js';
 import { keywordPlan } from '../service.js';
 import { staffContext } from '../matching.js';
 test('persisted research vocabulary and aliases work without private configuration files', async (t) => {

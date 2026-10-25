@@ -68,6 +68,40 @@ test('all public workflow pages render with escaping', async (t) => {
   }
   assert.match((await f.get('/')).text, /&lt;script&gt;/);
 });
+test('Railway healthcheck host works without exposing authenticated pages', async (t) => {
+  const { store, config } = await tempStore(t, {
+    production: true,
+    password: 'test-private-password',
+    secret: 'test-secret-that-is-long-enough-for-sessions',
+    allowedHosts: ['demo.up.railway.app', 'healthcheck.railway.app'],
+  });
+  const app = createApp(store, config, { run: async () => {} });
+  const server = await new Promise((resolve) => {
+    const s = app.listen(0, '127.0.0.1', () => resolve(s));
+  });
+  t.after(() => {
+    server.closeAllConnections();
+    server.close();
+  });
+  const request = (host, path) =>
+    new Promise((resolve, reject) => {
+      http
+        .get(
+          { hostname: '127.0.0.1', port: server.address().port, path, headers: { Host: host } },
+          (res) => {
+            res.resume();
+            res.on('end', () => resolve(res));
+          },
+        )
+        .on('error', reject);
+    });
+  assert.equal((await request('healthcheck.railway.app', '/health')).statusCode, 200);
+  assert.equal((await request('healthcheck.railway.app', '/pipeline')).statusCode, 303);
+  assert.equal((await request('unknown.example', '/health')).statusCode, 400);
+  const login = await request('demo.up.railway.app', '/login');
+  assert.equal(login.statusCode, 200);
+  assert.match(login.headers['set-cookie'][0], /Secure/);
+});
 test('CSRF blocks mutations; pipeline survives valid form submit', async (t) => {
   const f = await fixture(t);
   await f.store.update((s) => upsert(s, record()));
@@ -91,6 +125,21 @@ test('private pages require sign-in and session rotates after login', async (t) 
   assert.equal((await f.get('/settings')).r.status, 200);
   await f.post('/logout');
   assert.equal((await f.get('/api/search-status')).r.status, 401);
+});
+
+test('original styles load before sign-in without exposing private organization information', async (t) => {
+  const f = await fixture(t, 'correct-password');
+  await f.store.update((s) => {
+    s.profile.name = 'Private organization identity';
+  });
+  const login = await f.get('/login');
+  assert.ok(!login.text.includes('Private organization identity'));
+  assert.match(login.text, /\/static\/original.css/);
+  assert.equal((await f.get('/static/original.css')).r.status, 200);
+  await f.post('/login', { password: 'correct-password' });
+  const dashboard = await f.get('/');
+  assert.match(dashboard.text, /Private organization identity/);
+  assert.match(dashboard.text, /aria-current="page"/);
 });
 test('CSV neutralizes spreadsheet formulas in staff notes', async (t) => {
   const f = await fixture(t);

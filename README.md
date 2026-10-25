@@ -1,6 +1,6 @@
 # GrantIQ
 
-Grant discovery, explainable matching, and staff pipeline management. The primary web application now runs **natively on Node.js**, with Express and PostgreSQL for SiteGround hosting. It does not launch Python or require a paid AI service.
+Grant discovery, explainable matching, and staff pipeline management. The primary web application now runs **natively on Node.js**, with Express and PostgreSQL for Railway or SiteGround hosting. It does not launch Python or require a paid AI service.
 
 ## Run on a computer
 
@@ -26,11 +26,15 @@ Set `GRANTIQ_SEMANTIC_MODE=local` in `.env.node`, restart, and run `npm run resc
 
 ## SiteGround
 
+For the Railway deployment path, see **[RAILWAY.md](RAILWAY.md)**. The explicit `railway.json` selects the Node container, includes the local semantic model, and keeps the scheduled search process awake. **[HOSTING-COMPARISON.md](HOSTING-COMPARISON.md)** explains estimated costs, staff ownership, backups, and the comparison with SiteGround. These files prepare deployment; they do not create or purchase a hosting account.
+
 See **[SITEGROUND.md](SITEGROUND.md)** for the exact build/start settings, PostgreSQL setup, environment variables, data migration, authentication, model choices, and deployment checks. Use the Express/custom Node preset, `npm run build`, and `npm start`. Production requires managed PostgreSQL, a shared staff password, a random session secret, and allowed hostnames.
 
 The code is prepared for SiteGround; account-level deployment and persistence/restart behavior must still be verified there. No SiteGround purchase or live deployment is performed by installing this repository.
 
 ## Workflows
+
+For a guided file map and explanation of the request/search flow, read **[CODE-GUIDE.md](CODE-GUIDE.md)**. The Node interface restores the original sidebar, overview cards, grant cards and grouped pipeline while retaining the bright monochrome theme.
 
 - Grants.gov discovery with bounded, rotating keyword searches and full detail retrieval.
 - Persistent 3/6/12/24-hour scheduling, heartbeat, failure/partial results and overlap protection.
