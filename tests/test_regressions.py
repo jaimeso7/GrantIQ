@@ -70,3 +70,24 @@ def test_dashboard_serves_assets_and_refresh_button_dispatches(client, monkeypat
     result = client.post("/refresh", data={"csrf_token": token})
     assert result.status_code == 200 and "Refresh started" in result.text
     assert len(dispatched) == 1 and "session_factory" in dispatched[0]
+
+def test_listing_rows_do_not_collapse_into_one_grant(factory):
+    """Every row of a listing page shares source_url; only source_id separates them."""
+    import httpx
+    from test_sources import LISTING_URL, listing_responder, listing_source, public_dns
+    with httpx.Client(transport=httpx.MockTransport(listing_responder())) as http:
+        source = listing_source(http, None)
+        records = list(source.fetch_grants())
+    assert len({r.source_url for r in records}) == 1 and len(records) == 5
+    ids = {seed(factory, item) for item in records}
+    assert len(ids) == 5
+    with factory() as session:
+        assert session.scalar(select(func.count()).select_from(Grant)) == 5
+    # A second refresh updates in place rather than duplicating.
+    for item in records:
+        with factory() as session:
+            _, added = upsert_grant(session, item, score_grant(item, get_profile(session), embedder=FixedEmbedder()))
+            session.commit()
+            assert added is False
+    with factory() as session:
+        assert session.scalar(select(func.count()).select_from(Grant)) == 5
