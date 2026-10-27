@@ -498,3 +498,16 @@ def test_parser_map_resolves_to_real_adapter_classes():
     assert set(PARSERS) == {"generic", "listing"}
     for name in PARSERS.values():
         assert isinstance(getattr(generic_scraper, name), type)
+
+
+def test_configured_crawl_delay_is_honored_when_robots_hides_it(tmp_path):
+    """Sites sometimes put Crawl-delay above their first User-agent line, where a
+    spec-compliant parser ignores it. An administrator can still set the floor."""
+    from grantiq.app.sources.generic_scraper import ListingScraperSource
+    orphaned = "Crawl-delay: 10\nUser-agent: *\nDisallow:"
+    with httpx.Client(transport=httpx.MockTransport(listing_responder(robots=orphaned))) as client:
+        item = {"name": "Example", "url": LISTING_URL, "terms_reviewed": True, "min_interval": 10}
+        source = ListingScraperSource(item, client=client, resolver=public_dns,
+                                      sleep=lambda _: None, cache_dir=tmp_path, today=date(2026, 12, 1))
+        assert len(list(source.fetch_grants())) == 5
+    assert source.min_interval == 10

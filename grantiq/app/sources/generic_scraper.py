@@ -474,6 +474,10 @@ class ListingScraperSource(ListingPageSource):
         kwargs.setdefault("cache_dir", os.getenv("GRANTIQ_CACHE_DIR", "data/cache"))
         if item.get("max_response_bytes"):
             kwargs.setdefault("max_response_bytes", int(item["max_response_bytes"]))
+        # A site may publish a crawl delay where a spec-compliant parser cannot see it
+        # (above its first User-agent line); this lets an administrator honour it anyway.
+        if item.get("min_interval"):
+            kwargs.setdefault("min_interval", float(item["min_interval"]))
         if item.get("source_key"):
             self.source_key = item["source_key"]
         super().__init__(name=item["name"], url=item["url"],
