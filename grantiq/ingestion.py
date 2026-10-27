@@ -13,6 +13,11 @@ from .app.services.repository import get_profile, upsert_grant, rescore_all
 
 log = logging.getLogger("grantiq.ingestion")
 
+# Approved-page parsers selectable from config. "generic" reads one opportunity
+# per page; "listing" reads one opportunity per row of a page that advertises
+# several. Neither follows links.
+PARSERS = {"generic": "GenericScraperSource", "listing": "ListingScraperSource"}
+
 def configured_sources(max_records=100, profile=None, session_factory=SessionLocal):
     import yaml
     from .app.sources.grants_gov import GrantsGovSource
@@ -44,10 +49,16 @@ def configured_sources(max_records=100, profile=None, session_factory=SessionLoc
         entries = [*(entries or []), *[{"name": row.name, "url": row.url, "source_key": f"Approved page {row.id}", "parser": "generic", "enabled": row.enabled, "terms_reviewed": row.terms_reviewed, "selectors": row.selectors} for row in database_sources]]
     seen_urls = set()
     for item in entries or []:
-        if item.get("enabled", False) and item.get("parser") == "generic" and item.get("url") not in seen_urls:
-            seen_urls.add(item.get("url"))
-            from .app.sources.generic_scraper import GenericScraperSource
-            yield GenericScraperSource(item)
+        parser = item.get("parser", "generic")
+        if not item.get("enabled", False) or item.get("url") in seen_urls:
+            continue
+        if parser not in PARSERS:
+            # Skipping silently would discard a source and still report a clean run.
+            log.warning("Skipping source %r: unsupported parser %r", item.get("name"), parser)
+            continue
+        seen_urls.add(item.get("url"))
+        from .app.sources import generic_scraper
+        yield getattr(generic_scraper, PARSERS[parser])(item)
 
 def run_refresh(*, sources=None, session_factory=SessionLocal, embedder=None, max_records=100):
     from .app.services.scoring import score_grant
