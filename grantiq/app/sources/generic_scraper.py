@@ -4,12 +4,13 @@ Each configured URL represents exactly one opportunity. Staff review the extract
 record and the funder's terms. No links, login, browser automation, or redirects
 are followed. Missing eligibility, amounts, and geography remain unconfirmed.
 """
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 import hashlib
 import ipaddress
 import json
 import os
 from pathlib import Path
+import re
 import socket
 import time
 from urllib.parse import urljoin, urlsplit, urlunsplit
@@ -17,11 +18,98 @@ from urllib.robotparser import RobotFileParser
 
 from bs4 import BeautifulSoup
 import httpx
+import soupsieve
 import yaml
 
 from ..schemas.domain import GrantRecord
+from ..services.deduplication import canonical_url, normalized_text
 from .base import HttpSource, SourceError, USER_AGENT, plain_text
 from .grants_gov import parse_amount, parse_date, public_link
+
+_MONTH = (r"(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?"
+          r"|Aug(?:ust)?|Sep(?:t|tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)")
+# A day number is required so prose like "March 2024 report" is never read as a date.
+_DATE = rf"{_MONTH}\s+\d{{1,2}}(?:st|nd|rd|th)?(?:\s*,?\s*\d{{4}})?"
+_SEP = r"\s*(?:–|—|‒|-|to|through|until)\s*"
+RANGE_RE = re.compile(rf"(?P<start>{_DATE}){_SEP}(?P<end>{_DATE})", re.I)
+SINGLE_RE = re.compile(_DATE, re.I)
+PIECE_RE = re.compile(rf"\s*({_MONTH})\s+(\d{{1,2}})(?:st|nd|rd|th)?(?:\s*,?\s*(\d{{4}}))?", re.I)
+ROLLING = re.compile(r"\b(rolling basis|rolling|ongoing|year[- ]round|any time|no deadline)\b", re.I)
+MONEY_RE = re.compile(r"\$[\d,]+(?:\.\d{2})?")
+COUNTY_RE = re.compile(r"\b([A-Z][A-Za-z.\-']{2,24})\s+Count(?:y|ies)\b")
+ELIGIBILITY_CUES = re.compile(r"\b(eligib\w*|budgets? of|must be|open to|limited to|only|"
+                              r"organizations with|applicants?)\b", re.I)
+_MONTH_NUMBERS = {name: number for number, name in enumerate(
+    ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
+
+
+def _sentence_around(text: str, start: int, end: int) -> str:
+    """The whole sentence containing a match, kept verbatim for deadline_text."""
+    left = max(text.rfind(mark, 0, start) for mark in (". ", "! ", "? "))
+    right = min((pos for pos in (text.find(mark, end) for mark in (". ", "! ", "? ")) if pos >= 0),
+                default=-1)
+    return text[(0 if left < 0 else left + 2):(len(text) if right < 0 else right + 1)].strip()
+
+
+def _piece(text: str) -> tuple[int, int, int | None] | None:
+    match = PIECE_RE.match(text)
+    if not match:
+        return None
+    return _MONTH_NUMBERS[match.group(1).lower()[:3]], int(match.group(2)), \
+        int(match.group(3)) if match.group(3) else None
+
+
+def parse_date_window(text: str) -> tuple[date | None, date | None, str]:
+    """Read an application window from prose. Returns (start, end, verbatim sentence).
+
+    Listing pages write ranges like "Application is open January 5 - March 3, 2027",
+    where only the closing date carries a year. A missing year is inferred from the
+    other end of the range, never from the current date: a fabricated deadline either
+    hides a live grant or advertises a dead one.
+    """
+    match = RANGE_RE.search(text)
+    if match:
+        prose = _sentence_around(text, match.start(), match.end())
+        start, end = _piece(match.group("start")), _piece(match.group("end"))
+        if not start or not end:
+            return None, None, prose
+        (start_month, start_day, start_year), (end_month, end_day, end_year) = start, end
+        if start_year is None and end_year is None:
+            return None, None, prose
+        if end_year is None:
+            end_year = start_year
+        if start_year is None:
+            start_year = end_year
+            # A window that would run backwards actually crosses New Year.
+            if (start_month, start_day) > (end_month, end_day):
+                start_year = end_year - 1
+        try:
+            opens, closes = date(start_year, start_month, start_day), date(end_year, end_month, end_day)
+        except ValueError:
+            return None, None, prose
+        return (opens, closes, prose) if opens <= closes else (None, closes, prose)
+    match = SINGLE_RE.search(text)
+    if match:
+        prose = _sentence_around(text, match.start(), match.end())
+        piece = _piece(match.group(0))
+        if piece and piece[2]:
+            try:
+                return None, date(piece[2], piece[0], piece[1]), prose
+            except ValueError:
+                return None, None, prose
+        return None, None, prose
+    return None, None, ""
+
+
+def window_status(opens: date | None, closes: date | None, today: date) -> str:
+    """Map an application window onto the GrantRecord status vocabulary."""
+    if opens is None and closes is None:
+        return "unknown"
+    if closes is not None and today > closes:
+        return "closed"
+    if opens is not None and today < opens:
+        return "forecasted"
+    return "posted"
 
 
 def validate_public_url(url: str, resolver=socket.getaddrinfo) -> tuple[str, list[str]]:
@@ -232,3 +320,164 @@ class GenericScraperSource(GenericPageSource):
         super().__init__(name=item["name"], url=item["url"],
                          terms_reviewed=item.get("terms_reviewed", False),
                          selectors=item.get("selectors"), **kwargs)
+
+
+class ListingPageSource(GenericPageSource):
+    """One approved page that advertises several opportunities, one row each.
+
+    Still not a crawler: exactly two requests are made, robots.txt and the listing
+    page itself. Each row's "more information" link is recorded as application_url
+    for staff to follow; it is never retrieved. Amounts, populations and applicant
+    types are not on a listing page and are left unknown rather than guessed.
+    """
+
+    DEFAULT_SELECTORS = {"row": "details.e-n-accordion-item",
+                         "title": "h6.e-n-accordion-item-title-text",
+                         "application_url": "a[href]"}
+    MAX_DESCRIPTION = 4000
+    MAX_RAW_TEXT = 8000
+
+    def __init__(self, name: str, url: str, *, selectors: dict[str, str] | None = None,
+                 defaults: dict | None = None, max_rows: int = 100, today: date | None = None,
+                 allow_detail_fetch: bool = False, **kwargs):
+        super().__init__(name=name, url=url, selectors={**self.DEFAULT_SELECTORS, **(selectors or {})}, **kwargs)
+        self.defaults = defaults or {}
+        self.max_rows = max(1, int(max_rows))
+        self.today = today
+        self.allow_detail_fetch = allow_detail_fetch is True
+        self._row_keys: dict[str, int] = {}
+        for key, selector in self.selectors.items():
+            try:
+                soupsieve.compile(selector)
+            except Exception as exc:  # soupsieve raises several exception types
+                raise SourceError(f"Invalid {key!r} selector {selector!r}: {exc}") from exc
+
+    def _row_source_id(self, detail_href: str | None, title: str) -> tuple[str, bool]:
+        """Identity per row. Without this every row collapses into a single grant.
+
+        The detail-page permalink is preferred because it survives row reordering,
+        title edits and the annual cycle; the normalized title is the fallback for a
+        row with no link. The listing:v1 namespace makes any future change to this
+        derivation an explicit, reviewable bump rather than silent mass duplication.
+        """
+        key = canonical_url(urljoin(self.url, detail_href)) if detail_href else f"title:{normalized_text(title)}"
+        count = self._row_keys.get(key, 0) + 1
+        self._row_keys[key] = count
+        unique = key if count == 1 else f"{key}#{count}"
+        return hashlib.sha256(f"listing:v1|{self.url}|{unique}".encode()).hexdigest(), count > 1
+
+    def fetch_grants(self):
+        self.errors.clear()
+        self._row_keys = {}
+        try:
+            if self.allow_detail_fetch:
+                raise SourceError("Detail-page retrieval is configured but not implemented; "
+                                  "this adapter reads the listing page only.")
+            entry = self._guarded_get()
+            soup = BeautifulSoup(entry["text"], "html.parser")
+            for node in soup(["script", "style", "noscript", "iframe", "nav", "footer", "header", "form"]):
+                node.decompose()
+            rows = soup.select(self.selectors["row"])
+        except (SourceError, ValueError, OSError, TypeError) as exc:
+            self.stats["rejected"] += 1
+            self._error(str(exc))
+            return
+        self.stats["rows_matched"] = len(rows)
+        # Loud on structural breakage: a silent empty result would let the dashboard
+        # report a clean run while staff conclude there are no local grants.
+        if not rows:
+            self.stats["rejected"] += 1
+            self._error(f"Listing selector {self.selectors['row']!r} matched no rows on {self.url}; "
+                        "the page layout likely changed and no opportunities were ingested.")
+            return
+        if len(rows) > self.max_rows:
+            self.stats["rejected"] += 1
+            self._error(f"Listing selector {self.selectors['row']!r} matched {len(rows)} rows, above the "
+                        f"{self.max_rows}-row cap; the selector is too broad and no opportunities were ingested.")
+            return
+        for index, row in enumerate(rows, 1):
+            self.stats["found"] += 1
+            try:
+                record = self.normalize_grant({"row": row, "retrieved_at": entry.get("retrieved_at")})
+            except (SourceError, ValueError, OSError, TypeError) as exc:
+                self.stats["rejected"] += 1
+                self._error(f"row {index}: {type(exc).__name__}: {exc}")
+                continue
+            self.stats["normalized"] += 1
+            yield record
+
+    def normalize_grant(self, raw_data: dict) -> GrantRecord:
+        row = raw_data["row"]
+        title_node = row.select_one(self.selectors["title"])
+        title = plain_text(title_node.get_text(" ", strip=True)) if title_node else ""
+        if not title:
+            raise SourceError(f"Row matched {self.selectors['row']!r} but has no title")
+        row_text = plain_text(row.get_text(" ", strip=True))
+        description = row_text[len(title):].strip() if row_text.startswith(title) else row_text
+
+        warnings = ["Listing-page extraction requires human review; eligibility, amounts, and open "
+                    "status are unconfirmed.",
+                    "The linked detail page was not retrieved; this record reflects only the listing summary."]
+        link = row.select_one(self.selectors["application_url"]) if self.selectors.get("application_url") else None
+        href = link.get("href") if link and link.get("href") else None
+        source_id, collided = self._row_source_id(href, title)
+        if collided:
+            warnings.append("Another row on this page resolved to the same identity; review both records.")
+
+        opens, closes, prose = parse_date_window(row_text)
+        if opens is None and closes is None:
+            rolling = ROLLING.search(row_text)
+            if rolling:
+                # deadline_text carries the verbatim phrase so the existing rolling
+                # rule in scoring._readiness awards credit without a fabricated date.
+                prose, status = _sentence_around(row_text, rolling.start(), rolling.end()), "posted"
+            else:
+                status = "unknown"
+                warnings.append("No application window could be read from the listing; "
+                                "confirm the current cycle with the funder.")
+        else:
+            status = window_status(opens, closes, self.today or date.today())
+
+        restrictions = [f"{name} County" for name in dict.fromkeys(COUNTY_RE.findall(row_text))]
+        scope = "local" if restrictions else "unknown"
+        if not restrictions and self.defaults.get("geographic_restrictions"):
+            restrictions = list(self.defaults["geographic_restrictions"])
+            scope = self.defaults.get("geography_scope", "unknown")
+            warnings.append("Geographic eligibility was asserted by an administrator in configuration, "
+                            "not read from the source page.")
+        amounts = list(dict.fromkeys(MONEY_RE.findall(row_text)))
+        if amounts:
+            warnings.append(f"The listing mentions {', '.join(amounts)} without saying whether this is an "
+                            "award size, a total pool, or a cap on the applicant's own budget; amounts were "
+                            "left unset for staff to classify.")
+        eligibility = " ".join(part.strip() for part in re.split(r"(?<=[.!?])\s+", row_text)
+                               if ELIGIBILITY_CUES.search(part))
+
+        return GrantRecord(
+            source=getattr(self, "source_key", self.name), source_id=source_id,
+            source_url=self.url, application_url=public_link(urljoin(self.url, href)) if href else None,
+            funder_name=self.name, grant_title=title, description=description[:self.MAX_DESCRIPTION],
+            eligibility_text=eligibility[:2000],
+            geographic_restrictions=restrictions,
+            geography_scope=scope if scope in {"local", "state", "regional", "national"} else "unknown",
+            open_date=opens, deadline=closes, deadline_text=prose, grant_status=status,
+            last_checked=datetime.fromtimestamp(raw_data.get("retrieved_at") or time.time(), timezone.utc),
+            # Per row, never the whole page: verification.source_revision hashes this,
+            # so a page-wide value would invalidate every row's review when one changes.
+            raw_text=row_text[:self.MAX_RAW_TEXT], warnings=warnings)
+
+
+class ListingScraperSource(ListingPageSource):
+    """Configuration-dict entry point for listing pages, mirroring GenericScraperSource."""
+
+    def __init__(self, item: dict, **kwargs):
+        kwargs.setdefault("cache_dir", os.getenv("GRANTIQ_CACHE_DIR", "data/cache"))
+        if item.get("max_response_bytes"):
+            kwargs.setdefault("max_response_bytes", int(item["max_response_bytes"]))
+        if item.get("source_key"):
+            self.source_key = item["source_key"]
+        super().__init__(name=item["name"], url=item["url"],
+                         terms_reviewed=item.get("terms_reviewed", False),
+                         selectors=item.get("selectors"), defaults=item.get("defaults"),
+                         max_rows=item.get("max_rows", 100),
+                         allow_detail_fetch=item.get("allow_detail_fetch", False), **kwargs)
