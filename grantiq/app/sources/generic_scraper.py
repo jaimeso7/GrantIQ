@@ -121,32 +121,41 @@ class GenericPageSource(HttpSource):
             cache_file.write_text(json.dumps(entry), encoding="utf-8")
         return entry
 
+    def _guarded_get(self, url: str | None = None) -> dict:
+        """Terms gate, fail-closed robots check, crawl-delay adoption, and challenge scan.
+
+        Raises before any network request when terms are unreviewed. Shared by every
+        approved-page adapter so the gate exists in exactly one place.
+        """
+        url = url or self.url
+        if not self.terms_reviewed:
+            raise SourceError("Source disabled: an administrator must review terms and set terms_reviewed: true")
+        parts = urlsplit(url)
+        robots_url = urlunsplit((parts.scheme, parts.netloc, "/robots.txt", "", ""))
+        robots = self._cached_get(robots_url)
+        # An HTML block page is not evidence of robots permission.
+        if "user-agent:" not in robots["text"].lower():
+            raise SourceError("robots.txt is missing valid directives; retrieval is blocked pending review")
+        policy = RobotFileParser(robots_url)
+        policy.parse(robots["text"].splitlines())
+        if not policy.can_fetch(USER_AGENT, url):
+            raise SourceError("robots.txt disallows this opportunity URL")
+        delay = policy.crawl_delay(USER_AGENT) or policy.crawl_delay("*")
+        if delay:
+            self.min_interval = max(self.min_interval, float(delay))
+        rate = policy.request_rate(USER_AGENT) or policy.request_rate("*")
+        if rate and rate.requests:
+            self.min_interval = max(self.min_interval, rate.seconds / rate.requests)
+        entry = self._cached_get(url)
+        lower_text = entry["text"].lower()
+        if any(marker in lower_text for marker in ("g-recaptcha", "h-captcha", "cf-chl-", 'type="password"', "type='password'")):
+            raise SourceError("Page presents a login or access challenge; manual review is required")
+        return entry
+
     def fetch_grants(self):
         self.errors.clear()
         try:
-            if not self.terms_reviewed:
-                raise SourceError("Source disabled: an administrator must review terms and set terms_reviewed: true")
-            parts = urlsplit(self.url)
-            robots_url = urlunsplit((parts.scheme, parts.netloc, "/robots.txt", "", ""))
-            robots = self._cached_get(robots_url)
-            # An HTML block page is not evidence of robots permission.
-            if "user-agent:" not in robots["text"].lower():
-                raise SourceError("robots.txt is missing valid directives; retrieval is blocked pending review")
-            policy = RobotFileParser(robots_url)
-            policy.parse(robots["text"].splitlines())
-            if not policy.can_fetch(USER_AGENT, self.url):
-                raise SourceError("robots.txt disallows this opportunity URL")
-            delay = policy.crawl_delay(USER_AGENT) or policy.crawl_delay("*")
-            if delay:
-                self.min_interval = max(self.min_interval, float(delay))
-            rate = policy.request_rate(USER_AGENT) or policy.request_rate("*")
-            if rate and rate.requests:
-                self.min_interval = max(self.min_interval, rate.seconds / rate.requests)
-            entry = self._cached_get(self.url)
-            lower_text = entry["text"].lower()
-            if any(marker in lower_text for marker in ("g-recaptcha", "h-captcha", "cf-chl-", 'type="password"', "type='password'")):
-                raise SourceError("Page presents a login or access challenge; manual review is required")
-            record = self.normalize_grant(entry)
+            record = self.normalize_grant(self._guarded_get())
             self.stats["found"] += 1
             self.stats["normalized"] += 1
             yield record
