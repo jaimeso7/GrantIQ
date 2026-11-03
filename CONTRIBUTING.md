@@ -1,5 +1,20 @@
 # Working on GrantIQ
 
+## Node.js application (primary)
+
+Use Node 22.13+ (22.x) or 24.x and npm. Run `npm ci`, `npm run build`, and `npm test`.
+The browser app starts with `npm start`; deployment settings are in SITEGROUND.md.
+The PostgreSQL integration test is enabled by `GRANTIQ_TEST_POSTGRES_URL` and must point
+to a disposable test database. The Node workflow supplies a separate PostgreSQL service.
+
+Keep eligibility, scoring, source completeness, and staff preferences separate. The
+synthetic Python parity fixtures must continue to match component points and eligibility.
+Refreshes must never overwrite staff pipeline data. Never introduce a Python child process
+into the Node runtime. Format JavaScript with `node node_modules/prettier/bin/prettier.cjs --write "node/**/*.js"`.
+Private data and model caches remain ignored; do not commit `.env.node` or database exports.
+
+## Legacy Python application
+
 Use Python 3.12 and an isolated virtual environment. Install the tested package versions:
 
 ```bash
