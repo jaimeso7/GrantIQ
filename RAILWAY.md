@@ -2,6 +2,31 @@
 
 Prepared October 25, 2026. This is deployment preparation, not evidence of a live Railway deployment. See [HOSTING-COMPARISON.md](HOSTING-COMPARISON.md) for stakeholder costs and responsibilities.
 
+## Simplified setup (updated November 2, 2026)
+
+If Railway shows **"Trials are temporarily paused for new accounts"**, the deployment is blocked by the account's plan, before GrantIQ starts. Code changes cannot remove that restriction. Select a paid plan if approved by VIP, or contact Railway support about eligibility. A displayed trial credit balance does not override the restriction. No plan purchase is performed by this repository.
+
+After the account can deploy:
+
+1. Add **PostgreSQL** to the project. Keep the database on Railway's private network.
+2. Connect `jaimeso7/GrantIQ`, choose **`codex/siteground-node`**, and keep the root directory at the repository root. The old `main` branch is not the Node migration. The checked-in `railway.json` selects the correct Node Dockerfile automatically.
+3. On the **app service**, add these variables (adjust `Postgres` to the actual database service name):
+
+   | Variable | Value |
+   | --- | --- |
+   | `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` |
+   | `GRANTIQ_ADMIN_PASSWORD` | A long, unique staff password |
+   | `GRANTIQ_SECRET_KEY` | A securely generated random secret, at least 32 characters |
+   | `GRANTIQ_SCHEDULER` | `false` during initial setup/import |
+
+4. Under the app's networking settings, **Generate Domain**. GrantIQ recognizes Railway's `RAILWAY_PUBLIC_DOMAIN`, allows its healthcheck hostname, uses the assigned `PORT`, and enforces production security automatically. Redeploy after saving variables/domain if needed. Add `GRANTIQ_ALLOWED_HOSTS` only for additional custom hostnames. Do not include `https://`, paths, ports or wildcards.
+5. Check the deployment logs and `/health`. Open the HTTPS URL and sign in. A missing configuration error names the setting to fix without printing passwords. `npm run check:config` can validate runtime settings from the service shell without opening a database connection; it is not a build-time check.
+6. Verify persistent saves, matching mode and a manual search. Then set `GRANTIQ_SCHEDULER=true`, redeploy and enable the desired schedule in Data sources. Complete backup/restore and unattended-search checks below.
+
+`GRANTIQ_DATABASE_URL` still works and takes precedence over `DATABASE_URL` for existing deployments. Database variables must be referenced on the app service; creating the database alone does not inject them. Do not substitute the public database URL. The Node container supplies production and model-cache defaults; there is no need to install Python, create an app disk volume, or override the start command.
+
+Official references: [Railway variables](https://docs.railway.com/variables/reference), [PostgreSQL references](https://docs.railway.com/databases/postgresql). See [SYSTEM-ARCHITECTURE.md](SYSTEM-ARCHITECTURE.md) for the system diagram.
+
 ## Architecture
 
 Staff browser → Railway HTTPS endpoint → one Node.js/Express service → PostgreSQL over Railway private networking. The Node process also runs the recurring grant-search worker. MiniLM runs on CPU inside the app, without a paid AI API. No Python service is needed.

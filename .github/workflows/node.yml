@@ -35,8 +35,9 @@ jobs:
         run: |
           docker run --detach --name grantiq-smoke --network host \
             -e PORT=3100 \
-            -e GRANTIQ_DATABASE_URL=postgresql://grantiq:test-only-password@127.0.0.1:5432/grantiq_test \
-            -e GRANTIQ_ALLOWED_HOSTS=127.0.0.1,healthcheck.railway.app \
+            -e DATABASE_URL=postgresql://grantiq:test-only-password@127.0.0.1:5432/grantiq_test \
+            -e RAILWAY_PROJECT_ID=ci-project \
+            -e RAILWAY_PUBLIC_DOMAIN=127.0.0.1 \
             -e GRANTIQ_ADMIN_PASSWORD=ci-only-password \
             -e GRANTIQ_SECRET_KEY=ci-only-session-secret-at-least-32-characters \
             -e GRANTIQ_SCHEDULER=false grantiq-railway:ci
@@ -47,6 +48,7 @@ jobs:
           curl --fail --silent -H 'Host: healthcheck.railway.app' http://127.0.0.1:3100/health
           test "$(curl --silent -o /dev/null -w '%{http_code}' http://127.0.0.1:3100/)" = 303
           curl --fail --silent http://127.0.0.1:3100/static/original.css > /dev/null
+          docker exec grantiq-smoke npm run check:config
           docker exec grantiq-smoke node --input-type=module -e "import {loadModel} from './node/embeddings.js'; await loadModel(); console.log('Cached MiniLM loads without a download');"
       - name: Container diagnostics and cleanup
         if: always()

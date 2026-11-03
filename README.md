@@ -4,6 +4,8 @@ Grant discovery, explainable matching, and staff pipeline management. The primar
 
 ## Run on a computer
 
+For Railway, start with the [simplified setup](RAILWAY.md#simplified-setup-updated-november-2-2026) and [system architecture](SYSTEM-ARCHITECTURE.md). `npm run check:config` checks environment settings without revealing credentials.
+
 Install Node.js **22.13+ (22.x) or 24.x**, including npm. From this project folder:
 
 ```sh

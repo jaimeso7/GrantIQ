@@ -8,6 +8,7 @@
     "node": ">=22.13.0 <25"
   },
   "scripts": {
+    "check:config": "node --env-file-if-exists=.env.node node/scripts/check-config.js",
     "start": "node --env-file-if-exists=.env.node node/server.js",
     "build": "node node/scripts/check.js",
     "test": "node --test node/tests/*.test.js",
