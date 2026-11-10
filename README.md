@@ -1,6 +1,6 @@
 # GrantIQ
 
-Grant discovery, explainable matching, and staff pipeline management. The primary web application now runs **natively on Node.js**, with Express and PostgreSQL for Railway or SiteGround hosting. It does not launch Python or require a paid AI service.
+Grant discovery, explainable matching, and staff pipeline management. The primary web application now runs **natively on Node.js**, with Express and PostgreSQL for Railway hosting. It does not launch Python or require a paid AI service.
 
 ## Run on a computer
 
@@ -26,13 +26,11 @@ npm run model:download
 
 Set `GRANTIQ_SEMANTIC_MODE=local` in `.env.node`, restart, and run `npm run rescore`. This uses Transformers.js MiniLM locally on CPU. Test model memory and native-library support on the destination host. The cached ONNX weights are separate from Python's weights.
 
-## SiteGround
+## Railway hosting
 
-For the Railway deployment path, see **[RAILWAY.md](RAILWAY.md)**. The explicit `railway.json` selects the Node container, includes the local semantic model, and keeps the scheduled search process awake. **[HOSTING-COMPARISON.md](HOSTING-COMPARISON.md)** explains estimated costs, staff ownership, backups, and the comparison with SiteGround. These files prepare deployment; they do not create or purchase a hosting account.
+Use **[RAILWAY.md](RAILWAY.md)** with branch **`codex/railway`**. GrantIQ needs the Node container and PostgreSQL, not static hosting alone. The checked-in `railway.json` selects the container and keeps the recurring search process awake.
 
-See **[SITEGROUND.md](SITEGROUND.md)** for the exact build/start settings, PostgreSQL setup, environment variables, data migration, authentication, model choices, and deployment checks. Use the Express/custom Node preset, `npm run build`, and `npm start`. Production requires managed PostgreSQL, a shared staff password, a random session secret, and allowed hostnames.
-
-The code is prepared for SiteGround; account-level deployment and persistence/restart behavior must still be verified there. No SiteGround purchase or live deployment is performed by installing this repository.
+See **[RAILWAY-COSTS-AND-KEYS.md](RAILWAY-COSTS-AND-KEYS.md)** for the coordinator's credential list, provider prices, planning estimates and ownership decisions. No account purchase or live deployment is performed by installing this repository.
 
 ## Workflows
 
@@ -58,7 +56,7 @@ Create a consistent backup of the Python database, then import into an unused No
 npm run import:python -- /path/to/grantiq-snapshot.db
 ```
 
-The source is opened read-only. Profile, grants, pipeline, approved sources, research decisions, review history, search cursor and recent runs are retained. The imported schedule is paused. Historical verified corrections require renewed review because their hash encoding differs. Follow SITEGROUND.md before transferring private data or enabling searches.
+The source is opened read-only. Profile, grants, pipeline, approved sources, research decisions, review history, search cursor and recent runs are retained. The imported schedule is paused. Historical verified corrections require renewed review because their hash encoding differs. Follow DATA-MIGRATION.md before transferring private data or enabling searches.
 
 The legacy Python implementation remains under `grantiq/`; its setup is documented in **[README-PYTHON.md](README-PYTHON.md)**. Do not run both schedulers against the same workspace. New Node work uses its own store; changes do not synchronize back to Python.
 
@@ -83,7 +81,7 @@ node/
 config/examples/        Safe public research templates
 config/organization.yaml Initial organization profile
 package-lock.json       Locked Node dependencies
-SITEGROUND.md           Deployment and handoff guide
+RAILWAY.md              Deployment and handoff guide
 ```
 
 ## Verification

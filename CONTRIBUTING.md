@@ -3,7 +3,7 @@
 ## Node.js application (primary)
 
 Use Node 22.13+ (22.x) or 24.x and npm. Run `npm ci`, `npm run build`, and `npm test`.
-The browser app starts with `npm start`; deployment settings are in SITEGROUND.md.
+The browser app starts with `npm start`; deployment settings are in RAILWAY.md.
 The PostgreSQL integration test is enabled by `GRANTIQ_TEST_POSTGRES_URL` and must point
 to a disposable test database. The Node workflow supplies a separate PostgreSQL service.
 

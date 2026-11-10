@@ -9,7 +9,7 @@ If Railway shows **"Trials are temporarily paused for new accounts"**, the deplo
 After the account can deploy:
 
 1. Add **PostgreSQL** to the project. Keep the database on Railway's private network.
-2. Connect `jaimeso7/GrantIQ`, choose **`codex/siteground-node`**, and keep the root directory at the repository root. The old `main` branch is not the Node migration. The checked-in `railway.json` selects the correct Node Dockerfile automatically.
+2. Connect `jaimeso7/GrantIQ`, choose **`codex/railway`**, and keep the root directory at the repository root. The old `main` branch is not the Node migration. The checked-in `railway.json` selects the correct Node Dockerfile automatically.
 3. On the **app service**, add these variables (adjust `Postgres` to the actual database service name):
 
    | Variable | Value |
@@ -36,7 +36,7 @@ Staff browser → Railway HTTPS endpoint → one Node.js/Express service → Pos
 ## Initial deployment (developer)
 
 1. Create a VIP-owned Railway Pro workspace, with VIP billing and at least two authorized administrators. Invite developers using their own accounts. Do not share the owner's login.
-2. Connect the GitHub repository and select the migration branch **`codex/siteground-node`**, which now contains Railway support as well. Confirm it contains both this file and `railway.json`. Do not select the older Python-only main branch. Set the repository root as the service root.
+2. Connect the GitHub repository and select the migration branch **`codex/railway`**, which now contains Railway support as well. Confirm it contains both this file and `railway.json`. Do not select the older Python-only main branch. Set the repository root as the service root.
 3. Add the official PostgreSQL service in the same project/environment and region. Confirm its persistent volume. Start with 5 GB capacity; monitor database and backup growth. Keep the database private and disable unnecessary public TCP exposure. Do not attach the app's `railway.json` to the database service.
 4. Generate the app's Railway domain. Supply the runtime variables below before deploying. A first automatic deployment may fail until these are present; production fails closed intentionally.
 5. Build using the checked-in Railway configuration. It installs Node 22 dependencies, validates the app, and downloads/smoke-tests MiniLM during the Linux image build. No runtime start-command override is required. Let Railway provide `PORT`.
@@ -68,7 +68,7 @@ The image defaults to semantic matching. If memory is constrained, `GRANTIQ_SEMA
 
 GitHub is source code, not a database backup. A fresh deployment starts with public starter settings and no saved grants. Never bake the private SQLite database, staff notes, funder amounts, or research PDFs into the Docker image.
 
-For a Python-to-Node migration, use the read-only importer described in [SITEGROUND.md](SITEGROUND.md#move-existing-work-safely), but use the Railway PostgreSQL destination. Keep both source and destination schedules paused. A developer can run the importer locally with authorized private config files and a consistent SQLite snapshot, using a temporary TLS-protected database connection to the new destination. Initialize with private config before the first app startup if it is needed for keyword/funder seeds. Disable temporary public database access afterward. Verify counts, pipeline notes and private research; never overwrite an occupied destination. A Railway shell session runs remotely; `railway run` supplies variables to a local process and does not make private Railway DNS reachable from a laptop.
+For a Python-to-Node migration, use the read-only importer described in [DATA-MIGRATION.md](DATA-MIGRATION.md), but use the Railway PostgreSQL destination. Keep both source and destination schedules paused. A developer can run the importer locally with authorized private config files and a consistent SQLite snapshot, using a temporary TLS-protected database connection to the new destination. Initialize with private config before the first app startup if it is needed for keyword/funder seeds. Disable temporary public database access afterward. Verify counts, pipeline notes and private research; never overwrite an occupied destination. A Railway shell session runs remotely; `railway run` supplies variables to a local process and does not make private Railway DNS reachable from a laptop.
 
 If moving an already-populated Node PostgreSQL workspace, take a private `pg_dump` and restore into a new empty PostgreSQL database using a compatible PostgreSQL client. Preserve the original until validation. The current local Node SQLite store is not a PostgreSQL backup and must not be passed to the Python importer; a direct Node-SQLite transfer tool is not implemented. The original Python snapshot import does not include subsequent Node-only edits. Plan that transfer before cutover if staff have made new Node edits.
 
@@ -92,3 +92,7 @@ Official references: [Configuration](https://docs.railway.com/config-as-code/ref
 ## Optional foundation and web discovery
 
 Public foundation prospecting is enabled by default. Set `GRANTIQ_FOUNDATION_DISCOVERY=false` to disable it. Set `GRANTIQ_BRAVE_API_KEY` only after authorizing a suitable search API subscription; this secret enables three bounded web queries per run. Candid is not yet connected. See [GRANT-WATCH.md](GRANT-WATCH.md) for scope, costs, verification and handoff instructions.
+
+## Coordinator budget and credentials
+
+See [RAILWAY-COSTS-AND-KEYS.md](RAILWAY-COSTS-AND-KEYS.md), checked November 10, 2026. Railway hosts the full Node application and PostgreSQL; its static-hosting guide is not sufficient for this application.

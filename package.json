@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Grant discovery and staff workflow on Node.js for Railway and SiteGround",
+  "description": "Grant discovery and staff workflow on Node.js for Railway",
   "engines": {
     "node": ">=22.13.0 <25"
   },
