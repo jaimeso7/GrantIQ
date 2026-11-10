@@ -48,6 +48,7 @@ export function registerGrantsRoutes(app, { store, send, redirect, grant, fresh 
     const p = pipelineSchema.parse({
       ...req.body,
       requested_amount: number(req.body.requested_amount),
+      preparation_hours: number(req.body.preparation_hours),
       application_deadline: req.body.application_deadline || null,
       submission_date: req.body.submission_date || null,
     });

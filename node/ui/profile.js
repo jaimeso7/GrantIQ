@@ -1,4 +1,3 @@
-import { weights } from '../validation.js';
 import { input, textarea, select, form } from './html.js';
 
 export function settings(p, token) {
@@ -50,14 +49,16 @@ export function settings(p, token) {
           </div>
         </section>
         <section class="panel">
-          <h2>Seven scoring weights (must total 100)</h2>
-          <div class="grid">
-            ${Object.keys(weights)
-              .map((k) =>
-                input('weight_' + k, p.weights[k], 'number', 'min="0" max="100" step="0.5"'),
-              )
-              .join('')}
-          </div>
+          <h2>Grant-watch scoring policy</h2>
+          <p>
+            Mission/programs 25 Â· Geography 20 Â· Populations 15 Â· Eligible expenses 15 Â·
+            Application accessibility 10 Â· Funding value 10 Â· Timing 5.
+          </p>
+          <p>
+            90+ Exceptional Fit Â· 75â€“89 Strong Fit Â· 60â€“74 Moderate Fit Â· below 60 Lower
+            Priority. Unverified eligibility makes the score provisional. Explicit exclusion
+            disqualifies an opportunity.
+          </p>
         </section>`,
       'Save profile and rescore',
     )}`;

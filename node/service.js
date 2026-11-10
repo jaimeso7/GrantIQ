@@ -1,7 +1,9 @@
+import { recordUpdate } from './watch-report.js';
 import { createHash } from 'node:crypto';
 import { now, today, researchFile } from './store.js';
 import { grantSchema } from './validation.js';
-import { score, effective, normalize, staffContext, eligibility } from './matching.js';
+import { watchScore as score } from './grant-watch.js';
+import { effective, normalize, staffContext, eligibility } from './matching.js';
 import { semantic, modelStatus } from './embeddings.js';
 export const dispositions = [
   'Pursue',
@@ -60,7 +62,8 @@ export async function assess(item, profile) {
   );
   if (['source_changed', 'expired'].includes(state) && result.eligibility_status !== 'Ineligible') {
     result.eligibility_status = 'Needs Review';
-    result.recommendation = 'Needs Review';
+    result.provisional = true;
+    result.recommendation = `${result.priority} (provisional)`;
     result.warnings.push('Staff verification needs renewal.');
   }
   return result;
@@ -76,6 +79,7 @@ export async function upsert(s, raw) {
       g.sources.some((x) => x.source === record.source && x.source_id === record.source_id),
     ) || s.grants.find((g) => g.fingerprint === fp);
   const added = !g;
+  const previous = g?.record;
   if (!g) {
     g = {
       id: Math.max(0, ...s.grants.map((g) => g.id)) + 1,
@@ -102,6 +106,7 @@ export async function upsert(s, raw) {
   else g.sources.push(source);
   // Imported source facts never overwrite staff pipeline fields or review history.
   g.record = record;
+  recordUpdate(s, g, previous);
   g.fingerprint = fp;
   g.assessment = await assess(g, s.profile);
   return added;

@@ -1,3 +1,4 @@
+import { foundationLeads, saveLead } from './foundation-discovery.js';
 import { randomUUID } from 'node:crypto';
 import { now, hoursAfter } from './store.js';
 import { federal, approvedPage } from './sources.js';
@@ -11,7 +12,7 @@ import { keywordPlan, upsert } from './service.js';
 export function createDiscovery(
   store,
   config,
-  { fetchFederal = federal, fetchPage = approvedPage } = {},
+  { fetchFederal = federal, fetchPage = approvedPage, fetchLeads = foundationLeads } = {},
 ) {
   let timer = null,
     pending = null,
@@ -38,6 +39,7 @@ export function createDiscovery(
       renewal.unref();
       const errors = [],
         stats = { found: 0, rejected: 0, truncated: false };
+      let leadCount = 0;
       let added = 0,
         updated = 0;
       try {
@@ -58,7 +60,17 @@ export function createDiscovery(
           s.schedule.last_status = 'running';
           const plan = keywordPlan(s.profile, s.cursor, s.keywordLibrary);
           s.cursor = plan.cursor;
-          return { plan, sources: s.sources.filter((x) => x.enabled && x.terms_reviewed) };
+          const foundationCursor = s.foundationCursor || 0;
+          s.foundationCursor = foundationCursor + 1;
+          s.discoveryProviders = {
+            publicDirectory: !!config.foundationDiscovery,
+            webSearch: !!config.webSearchKey,
+          };
+          return {
+            foundationCursor,
+            plan,
+            sources: s.sources.filter((x) => x.enabled && x.terms_reviewed),
+          };
         });
         const save = async (record) => {
           if (lost) throw new Error('Discovery lease lost; stopped to avoid duplicate writes.');
@@ -71,12 +83,17 @@ export function createDiscovery(
             Object.assign(r, { found: stats.found, added, updated, rejected: stats.rejected });
           });
         };
-        for await (const record of fetchFederal(snapshot.plan.terms, config.maxRecords, {
-          stats,
-          errors,
-        })) {
-          if (stopping) throw new Error('Server shutting down; refresh interrupted.');
-          await save(record);
+        // Foundation research runs independently of government opportunities.
+        for await (const lead of fetchLeads(config, snapshot.foundationCursor, { errors })) {
+          if (stopping || lost) throw new Error('Foundation discovery interrupted.');
+          await store.update((s) => {
+            if (s.lease?.token !== token) throw new Error('Discovery lease lost.');
+            if (saveLead(s, lead)) {
+              leadCount++;
+              const run = s.runs.find((r) => r.id === id);
+              run.foundation_leads = (run.foundation_leads || 0) + 1;
+            }
+          });
         }
         for (const source of snapshot.sources) {
           if (stopping) throw new Error('Server shutting down; refresh interrupted.');
@@ -85,6 +102,13 @@ export function createDiscovery(
           } catch (e) {
             errors.push(`${source.name}: ${e.message}`);
           }
+        }
+        for await (const record of fetchFederal(snapshot.plan.terms, config.maxRecords, {
+          stats,
+          errors,
+        })) {
+          if (stopping) throw new Error('Server shutting down; refresh interrupted.');
+          await save(record);
         }
       } catch (e) {
         errors.push(e.message);
@@ -95,7 +119,7 @@ export function createDiscovery(
           const result = stopping
             ? 'interrupted'
             : errors.length
-              ? added + updated
+              ? added + updated + leadCount
                 ? 'partial'
                 : 'failed'
               : 'success';

@@ -55,6 +55,8 @@ export function configuration(env = process.env) {
   if (!production && !password && !['127.0.0.1', '::1', 'localhost'].includes(host))
     throw new Error('Unauthenticated mode must bind to loopback.');
   return {
+    foundationDiscovery: env.GRANTIQ_FOUNDATION_DISCOVERY !== 'false',
+    webSearchKey: env.GRANTIQ_BRAVE_API_KEY || '',
     production,
     password,
     secret,

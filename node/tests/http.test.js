@@ -58,6 +58,7 @@ test('all public workflow pages render with escaping', async (t) => {
     '/sources',
     '/sources/new',
     '/research',
+    '/watch',
     '/grants/1',
     '/grants/1/verify',
     '/sprint-review',
@@ -166,4 +167,46 @@ test('host header validation rejects untrusted hosts', async (t) => {
     r.on('error', reject);
   });
   assert.equal(code, 400);
+});
+
+test('foundation lead review and conversion preserve evidence boundaries and deduplicate', async (t) => {
+  const f = await fixture(t);
+  await f.store.update((s) => {
+    s.discoveryLeads = [
+      {
+        id: 'lead1',
+        title: '<script>unsafe</script>',
+        url: 'https://example.org',
+        disposition: 'Verify',
+        notes: '',
+      },
+    ];
+  });
+  const page = await f.get('/watch');
+  assert.ok(page.text.includes('&lt;script&gt;unsafe&lt;/script&gt;'));
+  const denied = await f.post('/research/leads/lead1', { disposition: 'Dismissed' }, false);
+  assert.equal(denied.status, 403);
+  assert.equal(
+    (
+      await f.post('/research/leads/lead1', {
+        disposition: 'Cultivate',
+        notes: 'Ask about eligibility',
+      })
+    ).status,
+    303,
+  );
+  const body = {
+    official_url: 'https://8.8.8.8/program',
+    funder_name: 'Example Foundation',
+    grant_title: 'Example Program',
+  };
+  assert.equal((await f.post('/research/leads/lead1/opportunity', body)).status, 303);
+  assert.equal((await f.post('/research/leads/lead1/opportunity', body)).status, 303);
+  const s = await f.store.read();
+  assert.equal(s.grants.length, 1);
+  assert.equal(s.grants[0].record.grant_status, 'unknown');
+  assert.equal(s.grants[0].record.application_url, null);
+  assert.equal(s.grants[0].assessment.provisional, true);
+  assert.equal(s.discoveryLeads[0].notes, 'Ask about eligibility');
+  assert.equal(s.discoveryLeads[0].disposition, 'Converted');
 });

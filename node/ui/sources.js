@@ -5,6 +5,18 @@ export function sources(s, token) {
   return /* HTML */ `${searchPanel(s, token)}
     <section class="panel" id="search-schedule">
       <h2>Search schedule</h2>
+      <p><a class="button" href="/watch">Foundation discovery and grant watch</a></p>
+      <p>
+        Recurring searches cover Grants.gov, approved official funding pages, and public foundation
+        research through ProPublica. Broader web discovery runs only when a Brave Search API key is
+        configured. Candid API access is pending confirmation.
+      </p>
+      <p>
+        Last run configuration: public directory
+        ${s.discoveryProviders?.publicDirectory ? 'enabled' : 'not yet run or disabled'}; broader
+        web search ${s.discoveryProviders?.webSearch ? 'enabled' : 'not configured or not yet run'}.
+        Searches run while this server is awake.
+      </p>
       ${form(
         '/sources/schedule',
         token,
@@ -28,8 +40,8 @@ export function sources(s, token) {
         .map(
           (x) =>
             /* HTML */ `<p>
-              <a href="/sources/${x.id}/edit">${esc(x.name)}</a> ·
-              ${x.enabled ? 'Enabled' : 'Disabled'} · ${esc(x.url)}
+              <a href="/sources/${x.id}/edit">${esc(x.name)}</a> Â·
+              ${x.enabled ? 'Enabled' : 'Disabled'} Â· ${esc(x.url)}
             </p>`,
         )
         .join('')}
@@ -42,8 +54,9 @@ export function sources(s, token) {
           (r) =>
             /* HTML */ `<details>
               <summary>
-                ${esc(r.status)} · ${esc(r.started_at)} · ${r.added || 0} added / ${r.updated || 0}
-                updated
+                ${esc(r.status)} Â· ${esc(r.started_at)} Â· ${r.added || 0} added /
+                ${r.updated || 0} updated Â· ${r.foundation_leads || 0} new foundation research
+                leads
               </summary>
               <p>
                 Found ${r.found || 0}; rejected ${r.rejected || 0}. Finished

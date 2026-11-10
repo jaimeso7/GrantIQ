@@ -64,6 +64,14 @@ export function detail(g, token) {
       ${pipelineForm(g, token)}
     </section>
     <section class="panel">
+      <h2>Application route and effort</h2>
+      <p><strong>${esc(a.application_path?.route || 'Not verified')}</strong></p>
+      <p>${esc(a.application_path?.effort || 'Preparation effort not verified.')}</p>
+      <p>${esc(a.application_path?.next || 'Review the official application guidelines.')}</p>
+      <ul>
+        ${(a.application_path?.barriers || []).map((b) => `<li>${esc(b)}</li>`).join('')}
+      </ul>
+      <p>Stages: ${esc(r.application_stages.join(' → ') || 'Not verified')}</p>
       <h2>Application requirements</h2>
       <ul>
         ${r.application_requirements.map((v) => /* HTML */ `<li>${esc(v)}</li>`).join('') ||

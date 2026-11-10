@@ -1,4 +1,4 @@
-import { profileSchema, lines, number, triBool, weights } from '../validation.js';
+import { profileSchema, lines, number, triBool } from '../validation.js';
 import { rescore } from '../service.js';
 import * as ui from '../views.js';
 
@@ -37,7 +37,8 @@ export function registerSettingsRoutes(app, { store, send, redirect }) {
       .split(',')
       .map((x) => Number(x.trim()));
     p.profile_source_url = b.profile_source_url || null;
-    p.weights = Object.fromEntries(Object.keys(weights).map((k) => [k, Number(b['weight_' + k])]));
+    // Preserve legacy profile weights for round-trip imports; active policy is versioned.
+    p.weights = (await store.read()).profile.weights;
     const profile = profileSchema.parse(p);
     await store.update(async (s) => {
       s.profile = profile;

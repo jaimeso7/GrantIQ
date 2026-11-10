@@ -40,10 +40,10 @@ export function overviewStats(grants, clock = Date.now()) {
       'Strong matches',
       active.filter(
         (g) =>
-          g.assessment?.fit_score >= 80 &&
+          g.assessment?.fit_score >= 75 &&
           ['Eligible', 'Likely Eligible'].includes(g.assessment?.eligibility_status),
       ).length,
-      'Fit score 80+ · eligibility considered',
+      'Fit score 75+ · eligibility considered',
       'spark',
     ],
     [
@@ -318,6 +318,16 @@ export function pipelineForm(grant, token) {
           'date',
         )}
       </div>
+      <p>
+        Preparation hours and project angle are staff planning estimates, not funder requirements.
+      </p>
+      ${input(
+        'preparation_hours',
+        saved.preparation_hours,
+        'number',
+        'min="0" max="10000" step="0.5"',
+      )}
+      ${textarea('project_angle', saved.project_angle)}
       ${textarea('notes', saved.notes)}${textarea('final_result', saved.final_result)}
     `,
     'Save pipeline',

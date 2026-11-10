@@ -1,5 +1,6 @@
 import * as ui from '../views.js';
 import { rescore } from '../service.js';
+import { rubricVersion } from '../grant-watch.js';
 import { today } from '../store.js';
 
 // Keep redirects, date-sensitive scoring and missing-grant errors consistent.
@@ -29,7 +30,14 @@ export function createRouteContext(store, config, discovery, sessions) {
     // Deadlines and verification expiry can change eligibility without new source data.
     // Refresh stale assessments on the next page read, using the same scoring path.
     const s = await store.read();
-    if (s.grants.some((g) => !g.assessment || g.assessment.scored_at.slice(0, 10) < today())) {
+    if (
+      s.grants.some(
+        (g) =>
+          !g.assessment ||
+          g.assessment.rubric_version !== rubricVersion ||
+          g.assessment.scored_at.slice(0, 10) < today(),
+      )
+    ) {
       await store.update(rescore);
       return store.read();
     }

@@ -24,7 +24,7 @@ export async function publicAddress(url, lookup = dns.lookup) {
 // Resolve, validate and pin the IP for this connection. Redirects are never followed.
 export async function request(
   url,
-  { method = 'GET', body = null, limit = 2_000_000, timeout = 25000 } = {},
+  { method = 'GET', body = null, headers = {}, limit = 2_000_000, timeout = 25000 } = {},
 ) {
   const { url: u, address } = await publicAddress(url);
   return new Promise((resolve, reject) => {
@@ -34,6 +34,7 @@ export async function request(
       {
         method,
         headers: {
+          ...headers,
           'User-Agent': 'GrantIQ/0.2 (+grant research; contact site administrator)',
           Accept: 'application/json,text/html,text/plain',
           'Accept-Encoding': 'identity',

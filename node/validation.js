@@ -142,6 +142,8 @@ export const pipelineSchema = z.object({
   application_deadline: date.nullable().default(null),
   submission_date: date.nullable().default(null),
   final_result: text.default(''),
+  preparation_hours: z.number().min(0).max(10000).nullable().default(null),
+  project_angle: text.default(''),
 });
 export const lines = (v) =>
   String(v || '')

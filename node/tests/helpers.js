@@ -43,7 +43,13 @@ export function seed() {
 }
 export async function tempStore(t, extra = {}) {
   const dataDir = await fs.mkdtemp(path.join(os.tmpdir(), 'grantiq-node-'));
-  const config = { ...configuration({}), dataDir, scheduler: false, ...extra };
+  const config = {
+    ...configuration({}),
+    dataDir,
+    scheduler: false,
+    foundationDiscovery: false,
+    ...extra,
+  };
   const store = await createStore(config, seed);
   t.after(async () => {
     await store.close();

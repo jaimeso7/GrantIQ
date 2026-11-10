@@ -2,7 +2,10 @@ import { dispositions } from '../service.js';
 import { esc, input, textarea, select, form } from './html.js';
 
 export function research(s, token) {
-  return /* HTML */ `<p class="lead">
+  return /* HTML */ `<p>
+      <a class="button" href="/watch">Open foundation discovery and grant watch</a>
+    </p>
+    <p class="lead">
       Staff preferences guide the shortlist separately from eligibility. A research review date is
       not an application deadline.
     </p>

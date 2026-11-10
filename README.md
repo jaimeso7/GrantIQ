@@ -99,3 +99,7 @@ Thirty synthetic fixtures compare Node eligibility and component scores with the
 For an optional real-model smoke test: `npm run model:download`. For a manual real search: `npm run refresh`. Partial/failed CLI searches exit nonzero and retain successful records.
 
 Private configuration, `.env.node`, data, research PDFs and internal meeting notes remain excluded from Git and deployment packages. Public clones show a public project overview at `/sprint-review`; private PDF routes are not part of this Node version.
+
+## Foundation-focused discovery
+
+The Node application includes a foundation research inbox, versioned grant-watch scoring, application-effort planning and a verified-opportunity report. See [GRANT-WATCH.md](GRANT-WATCH.md) for provider setup, Candid access requirements, recurring-search limits and the code path.

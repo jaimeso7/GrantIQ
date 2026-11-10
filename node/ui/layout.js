@@ -4,6 +4,7 @@ import { icon } from './icons.js';
 const navigation = [
   ['/', 'Discover grants', 'grid'],
   ['/pipeline', 'My pipeline', 'bookmark'],
+  ['/watch', 'Foundation watch', 'search'],
   ['/research', 'Team research', 'search'],
   ['/sources', 'Data sources', 'database'],
   ['/settings', 'Organization profile', 'settings'],
