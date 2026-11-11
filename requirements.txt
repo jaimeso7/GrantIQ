@@ -11,3 +11,4 @@ python-dotenv==1.2.3
 itsdangerous==2.2.0
 filelock==3.32.6
 sentence-transformers==6.0.1
+psycog2-binary==2.9.13
