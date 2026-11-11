@@ -129,7 +129,7 @@ tests/
 requirements.txt
 requirements-dev.txt
 .env.example
-Dockerfile
+Dockerfile.python
 compose.yaml
 ```
 

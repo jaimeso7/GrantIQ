@@ -1,7 +1,7 @@
 {% import 'macros.html' as ui %}
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#ffffff"><meta name="description" content="GrantIQ helps your nonprofit discover, understand, and prioritize public grant opportunities."><title>{% block title %}Discover opportunities{% endblock %} · GrantIQ</title><link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}?v=20260923"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#ffffff"><meta name="description" content="GrantIQ helps your nonprofit discover, understand, and prioritize public grant opportunities."><title>{% block title %}Discover opportunities{% endblock %} · GrantIQ</title><link rel="stylesheet" href="/static/styles.css?v=20260923"></head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <aside class="sidebar">
@@ -27,5 +27,5 @@
     <footer class="main-footer"><span>GrantIQ <span class="footer-divider">/</span> More opportunity. More impact.</span><span>Verify eligibility and deadlines with the official funder.</span></footer>
   </main>
 </div>
-{% if authenticated %}<script src="{{ url_for('static', path='/refresh.js') }}?v=20260923" defer></script>{% endif %}
+{% if authenticated %}<script src="/static/refresh.js?v=20260923" defer></script>{% endif %}
 </body></html>

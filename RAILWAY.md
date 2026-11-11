@@ -96,3 +96,23 @@ Public foundation prospecting is enabled by default. Set `GRANTIQ_FOUNDATION_DIS
 ## Coordinator budget and credentials
 
 See [RAILWAY-COSTS-AND-KEYS.md](RAILWAY-COSTS-AND-KEYS.md), checked November 10, 2026. Railway hosts the full Node application and PostgreSQL; its static-hosting guide is not sufficient for this application.
+
+## Deployed page appears unstyled or is missing Foundation watch
+
+Check `/health`: the current Node service reports `"runtime":"node"`.
+The older Python service reports only status/application. In Railway's app service,
+select Settings → Source → branch `codex/railway` and use the repository root.
+Use `railway.json` and `Dockerfile.railway`; the default `Dockerfile` now also runs
+Node to avoid accidentally building Python. Clear any custom Python/uvicorn start
+command. The legacy image is explicitly `Dockerfile.python`, used by compose.yaml.
+Deploy the latest commit, then confirm `/static/original.css` and `/static/node.css`
+return CSS over HTTPS before testing the login page.
+
+The Python template now uses same-origin asset paths so HTTPS proxies cannot
+cause it to emit HTTP stylesheet/script URLs. That fixes a legacy display defect;
+it does not add the newer Node features to a Python deployment.
+
+Before switching an existing staff workspace, preserve a database backup and follow
+DATA-MIGRATION.md. Python and Node do not automatically share application records
+just because they connect to the same PostgreSQL service. Do not delete or replace
+an existing database to resolve a display problem.

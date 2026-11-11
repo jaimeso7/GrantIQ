@@ -1,9 +1,18 @@
-FROM python:3.12-slim
+# Railway Node application. Keep in sync with the default Dockerfile.
+FROM node:22-bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates libgomp1 && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
-COPY requirements.txt requirements-lock.txt ./
-RUN pip install --no-cache-dir -r requirements.txt -c requirements-lock.txt
-COPY . .
-RUN useradd --create-home --uid 10001 grantiq && mkdir -p /app/data && chown -R grantiq:grantiq /app
-USER grantiq
-EXPOSE 8000
-CMD ["python", "-m", "uvicorn", "grantiq.app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1", "--no-proxy-headers"]
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+# Copy only application source and public starter configuration, never private research/data.
+COPY node ./node
+COPY config/organization.yaml ./config/organization.yaml
+COPY config/examples ./config/examples
+ENV GRANTIQ_MODEL_CACHE=/app/models
+# Bake the public MiniLM model into the image so redeployments need no writable model volume.
+RUN npm run build && npm run model:download && chown -R node:node /app
+ENV NODE_ENV=production HOST=0.0.0.0 GRANTIQ_SEMANTIC_MODE=local
+USER node
+EXPOSE 3000
+# Direct Node entry point receives Railway's termination signal for graceful shutdown.
+CMD ["node", "node/server.js"]
