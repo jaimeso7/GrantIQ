@@ -1,0 +1,3120 @@
+[
+  {
+    "name": "Python rule case 1",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.534626Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 83.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Likely Eligible",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 2",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "State governments only"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.544718Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 0.0,
+    "confidence_score": 90.0,
+    "eligibility_status": "Ineligible",
+    "points": {
+      "mission": 0.0,
+      "geography": 0.0,
+      "population": 0.0,
+      "funding": 0.0,
+      "program": 0.0,
+      "past_giving": 0.0,
+      "readiness": 0.0
+    }
+  },
+  {
+    "name": "Python rule case 3",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Orange County, Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.545737Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 0.0,
+    "confidence_score": 90.0,
+    "eligibility_status": "Ineligible",
+    "points": {
+      "mission": 0.0,
+      "geography": 0.0,
+      "population": 0.0,
+      "funding": 0.0,
+      "program": 0.0,
+      "past_giving": 0.0,
+      "readiness": 0.0
+    }
+  },
+  {
+    "name": "Python rule case 4",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Duval County, Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.546736Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 86.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Likely Eligible",
+    "points": {
+      "mission": 26.1,
+      "geography": 20.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 5",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [],
+      "geography_scope": "unknown",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.549751Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 71.1,
+    "confidence_score": 75.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 5.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 6",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "national",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.550756Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 76.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Likely Eligible",
+    "points": {
+      "mission": 26.1,
+      "geography": 10.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 7",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "Available nationally excluding Florida",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "national",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.552759Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 0.0,
+    "confidence_score": 90.0,
+    "eligibility_status": "Ineligible",
+    "points": {
+      "mission": 0.0,
+      "geography": 0.0,
+      "population": 0.0,
+      "funding": 0.0,
+      "program": 0.0,
+      "past_giving": 0.0,
+      "readiness": 0.0
+    }
+  },
+  {
+    "name": "Python rule case 8",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2000-01-01",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.554086Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 0.0,
+    "confidence_score": 90.0,
+    "eligibility_status": "Ineligible",
+    "points": {
+      "mission": 0.0,
+      "geography": 0.0,
+      "population": 0.0,
+      "funding": 0.0,
+      "program": 0.0,
+      "past_giving": 0.0,
+      "readiness": 0.0
+    }
+  },
+  {
+    "name": "Python rule case 9",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "forecasted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.554612Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 78.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 0.0
+    }
+  },
+  {
+    "name": "Python rule case 10",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": null,
+      "deadline_text": "rolling",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.557633Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 82.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Likely Eligible",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 4.0
+    }
+  },
+  {
+    "name": "Python rule case 11",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": null,
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.559632Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 79.1,
+    "confidence_score": 75.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 1.0
+    }
+  },
+  {
+    "name": "Python rule case 12",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": null,
+      "award_max": null,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.562632Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 77.1,
+    "confidence_score": 75.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 4.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 13",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 0.0,
+      "award_max": 0.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.565160Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 0.0,
+    "confidence_score": 90.0,
+    "eligibility_status": "Ineligible",
+    "points": {
+      "mission": 0.0,
+      "geography": 0.0,
+      "population": 0.0,
+      "funding": 0.0,
+      "program": 0.0,
+      "past_giving": 0.0,
+      "readiness": 0.0
+    }
+  },
+  {
+    "name": "Python rule case 14",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": null,
+      "award_max": 2000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.566166Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 0.0,
+    "confidence_score": 90.0,
+    "eligibility_status": "Ineligible",
+    "points": {
+      "mission": 0.0,
+      "geography": 0.0,
+      "population": 0.0,
+      "funding": 0.0,
+      "program": 0.0,
+      "past_giving": 0.0,
+      "readiness": 0.0
+    }
+  },
+  {
+    "name": "Python rule case 15",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": true,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.567188Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 83.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 16",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": true,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.569185Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 83.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 17",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": true,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.571182Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 83.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 18",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": true,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.573181Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 83.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 19",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": 100000.0,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.576728Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 83.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 20",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "Only children may be served; nonprofits may apply",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.579750Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 83.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 21",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "Nonprofits are not eligible",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.581745Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 0.0,
+    "confidence_score": 90.0,
+    "eligibility_status": "Ineligible",
+    "points": {
+      "mission": 0.0,
+      "geography": 0.0,
+      "population": 0.0,
+      "funding": 0.0,
+      "program": 0.0,
+      "past_giving": 0.0,
+      "readiness": 0.0
+    }
+  },
+  {
+    "name": "Python rule case 22",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.582765Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 83.1,
+    "confidence_score": 80.0,
+    "eligibility_status": "Likely Eligible",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 23",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.585259Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 75.1,
+    "confidence_score": 75.0,
+    "eligibility_status": "Likely Eligible",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 2.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 24",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.587274Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 71.85,
+    "confidence_score": 90.0,
+    "eligibility_status": "Likely Eligible",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 3.75,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 25",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "unknown",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.589262Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 83.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 5.0
+    }
+  },
+  {
+    "name": "Python rule case 26",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": "2099-01-01",
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.591264Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 78.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 0.0
+    }
+  },
+  {
+    "name": "Python rule case 27",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2026-10-23",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.593278Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 79.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Needs Review",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 1.0
+    }
+  },
+  {
+    "name": "Python rule case 28",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2026-11-10",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.595818Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 81.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Likely Eligible",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 3.0
+    }
+  },
+  {
+    "name": "Python rule case 29",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2026-11-30",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [],
+      "last_checked": "2026-10-21T20:52:25.598197Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 82.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Likely Eligible",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 0.0,
+      "readiness": 4.0
+    }
+  },
+  {
+    "name": "Python rule case 30",
+    "profile": {
+      "name": "Example charity",
+      "organization_type": "501(c)(3)",
+      "mission": "Vision care and preventive health for children",
+      "description": "",
+      "service_locations": [
+        "Duval County, Florida"
+      ],
+      "populations_served": [
+        "children"
+      ],
+      "programs": [
+        "vision screening"
+      ],
+      "funding_interests": [
+        "eye health"
+      ],
+      "minimum_desired_award": 5000.0,
+      "maximum_desired_award": null,
+      "ein": "",
+      "annual_budget": null,
+      "minimum_days_to_apply": 7,
+      "matching_funds_available": null,
+      "has_fiscal_sponsor": null,
+      "invited_by_funders": [],
+      "existing_funder_relationships": [],
+      "excluded_funders": [],
+      "weights": {
+        "mission": 30.0,
+        "geography": 20.0,
+        "population": 15.0,
+        "funding": 10.0,
+        "program": 10.0,
+        "past_giving": 10.0,
+        "readiness": 5.0
+      },
+      "readiness_thresholds": [
+        45,
+        30,
+        15
+      ],
+      "profile_source_url": null
+    },
+    "record": {
+      "source": "Test",
+      "source_id": "1",
+      "source_url": "https://example.org/grant",
+      "application_url": null,
+      "funder_name": "Example Foundation",
+      "grant_title": "Vision care for children",
+      "description": "Vision screening and preventive eye health",
+      "eligibility_text": "501(c)(3) nonprofit organizations are eligible.",
+      "applicant_types": [
+        "501(c)(3) nonprofits"
+      ],
+      "geographic_restrictions": [
+        "Florida"
+      ],
+      "geography_scope": "state",
+      "populations_served": [
+        "children"
+      ],
+      "categories": [],
+      "program_areas": [
+        "vision screening"
+      ],
+      "award_min": 5000.0,
+      "award_max": 10000.0,
+      "estimated_award": null,
+      "open_date": null,
+      "deadline": "2099-12-31",
+      "deadline_text": "",
+      "grant_status": "posted",
+      "application_requirements": [],
+      "contact_information": "",
+      "loi_required": null,
+      "application_stages": [],
+      "invitation_only": null,
+      "matching_funds_required": null,
+      "fiscal_sponsor_required": null,
+      "existing_relationship_required": null,
+      "budget_min": null,
+      "budget_max": null,
+      "past_giving": [
+        {
+          "recipient": "Charity",
+          "source_url": "https://example.org/evidence",
+          "purpose": "Vision care for children"
+        }
+      ],
+      "last_checked": "2026-10-21T20:52:25.600193Z",
+      "raw_text": "",
+      "warnings": [],
+      "is_demo": false
+    },
+    "fit_score": 93.1,
+    "confidence_score": 90.0,
+    "eligibility_status": "Likely Eligible",
+    "points": {
+      "mission": 26.1,
+      "geography": 17.0,
+      "population": 15.0,
+      "funding": 10.0,
+      "program": 10.0,
+      "past_giving": 10.0,
+      "readiness": 5.0
+    }
+  }
+]

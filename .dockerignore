@@ -14,3 +14,15 @@ __pycache__
 *.log
 .coverage
 htmlcov
+node_modules
+references
+docs
+outputs
+work
+config/existing_funders.json
+config/research_prospects.json
+config/search_keywords.json
+TEAM-NOTES.md
+SPRINT-REVIEW.md
+MEETING-GUIDE.md
+LOCAL-HOSTING.md
