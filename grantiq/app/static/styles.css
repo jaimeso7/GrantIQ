@@ -30,3 +30,11 @@ input,select,textarea,.stack-form input,.stack-form select,.stack-form textarea,
 #search-schedule{margin-bottom:28px}
 
 .research-jump{display:flex;flex-wrap:wrap;gap:12px 22px;margin:24px 0 32px}.research-jump a{text-decoration:underline}.research-prospect{margin-bottom:24px}.research-prospect p{font-size:16px;line-height:1.65}.research-prospect .text-details{margin-top:18px}.research-prospect .stack-form{margin-top:16px}#keywords,#existing-funders{margin-top:28px}#existing-funders td:first-child{white-space:normal;min-width:240px}.research-prospect .eyebrow{font-size:12px}.research-prospect .section-heading h2{overflow-wrap:anywhere}@media(max-width:760px){.sidebar nav{flex-wrap:wrap}.sidebar nav .nav-item{flex:1 1 30%}.research-prospect p{font-size:15px}}
+/* Discover views: grant opportunities and 990 foundations. */
+.view-tabs{display:flex;gap:6px;margin:0 0 22px;border-bottom:1px solid var(--line)}
+.view-tab{display:inline-flex;align-items:center;gap:7px;padding:10px 14px;margin-bottom:-1px;border-bottom:2px solid transparent;color:var(--body);font-weight:600}
+.view-tab:hover{text-decoration:none;color:var(--ink)}
+.view-tab.active{color:var(--ink);border-bottom-color:var(--ink)}
+.view-tab .icon{width:16px;height:16px}
+.table-scroll tr.relevant-row td{background:#fafafa}
+.table-scroll td .badge{margin-left:4px}

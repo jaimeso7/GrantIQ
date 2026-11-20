@@ -144,3 +144,54 @@ class GrantReview(Base):
     valid_until: Mapped[date] = mapped_column(Date)
     action: Mapped[str] = mapped_column(String(20), default="verified")
     grant: Mapped[Grant] = relationship(back_populates="reviews")
+
+class FoundationProspect(Base):
+    """A private foundation found in public IRS 990-PF filings.
+
+    Not a grant opportunity: there is no deadline, eligibility text or application.
+    The score is how closely the foundation's own stated grant purposes match the
+    mission, so it lives apart from Grant and its fit assessment.
+    """
+    __tablename__ = "foundation_prospects"
+    ein: Mapped[str] = mapped_column(String(9), primary_key=True)
+    name: Mapped[str] = mapped_column(Text)
+    city: Mapped[str] = mapped_column(String(100), default="")
+    assets: Mapped[float] = mapped_column(Float, default=0)
+    total_paid: Mapped[float] = mapped_column(Float, default=0)
+    paid_count: Mapped[int] = mapped_column(Integer, default=0)
+    relevant_total: Mapped[float] = mapped_column(Float, default=0)
+    relevant_count: Mapped[int] = mapped_column(Integer, default=0)
+    best_score: Mapped[float] = mapped_column(Float, default=0, index=True)
+    already_funder: Mapped[bool] = mapped_column(Boolean, default=False)
+    known_as: Mapped[str] = mapped_column(Text, default="")
+    funded_us: Mapped[bool] = mapped_column(Boolean, default=False)
+    # Grants VIP's own records show from this funder, and their total.
+    received: Mapped[list] = mapped_column(JSON, default=list)
+    received_total: Mapped[float] = mapped_column(Float, default=0)
+    # The filing's grant list is in an unpublished attachment, so it cannot be scored.
+    grants_in_attachment: Mapped[bool] = mapped_column(Boolean, default=False)
+    # 1 = based in Northeast Florida; 2 = elsewhere in Florida, giving to Northeast Florida.
+    tier: Mapped[int] = mapped_column(Integer, default=1)
+    nefl_count: Mapped[int] = mapped_column(Integer, default=0)
+    nefl_total: Mapped[float] = mapped_column(Float, default=0)
+    # The name on staff's "said no" list when this foundation declined; empty otherwise.
+    declined: Mapped[str] = mapped_column(Text, default="")
+    filing_year: Mapped[int] = mapped_column(Integer)
+    tax_period: Mapped[str] = mapped_column(String(20), default="")
+    object_id: Mapped[str] = mapped_column(String(30), default="")
+    # Every scored grant from the filing, best first, with its score breakdown.
+    gifts: Mapped[list] = mapped_column(JSON, default=list)
+    imported_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+class Irs990Schedule(Base):
+    """Single-row schedule for the monthly IRS 990-PF research refresh."""
+    __tablename__ = "irs990_schedule"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    enabled: Mapped[bool] = mapped_column(Boolean, default=True)
+    interval_days: Mapped[int] = mapped_column(Integer, default=30)
+    next_run_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    last_started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    last_finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    last_status: Mapped[str] = mapped_column(String(32), default="waiting")
+    last_error: Mapped[str] = mapped_column(Text, default="")
+    last_summary: Mapped[dict] = mapped_column(JSON, default=dict)

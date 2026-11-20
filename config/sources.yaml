@@ -1,22 +1,46 @@
 # Optional approved public pages. Grants.gov uses its official API independently.
-# Every entry must identify ONE opportunity page. There is no link-following crawl.
 # Administrators must review the actual website terms before enabling retrieval.
 # Missing or disallowed robots.txt, redirects, login/challenges, or private network
 # addresses prevent ingestion. Unconfirmed scraped fields always need review.
+#
+# Two parsers are available, and neither follows links:
+#   parser: generic  - the page describes exactly ONE opportunity.
+#   parser: listing  - the page advertises SEVERAL, one per repeated element. Each
+#                      row's detail link is recorded for staff but never retrieved.
+#
+# Give every entry the URL the site actually serves. Redirects are never followed,
+# so a URL that 301/302s anywhere will fail outright.
 sources: []
 
-# Example configuration only. Replace URL/selectors with a real approved source.
+# Examples only; both are disabled and terms-unreviewed. Copy into your local
+# config and have an administrator review each site's terms before enabling.
+#
 # sources:
-#   - name: Example Foundation
-#     url: https://example.org/grants/community-health
+#   # A listing page: 13 grant programs, one per accordion row.
+#   - name: The Community Foundation for Northeast Florida
+#     source_key: jaxcf-listing          # pin this: renaming would orphan every record
+#     url: https://www.jaxcf.org/apply-for-grants-or-scholarships/
+#     # NOTE: /apply/ redirects here, and redirects are never followed. Use this URL.
+#     parser: listing
+#     enabled: false
+#     terms_reviewed: false
+#     min_interval: 10                   # the site asks for a 10s crawl delay, but
+#                                        # places it above its User-agent line where a
+#                                        # spec-compliant parser ignores it. Honour it.
+#     selectors:
+#       row: details.e-n-accordion-item  # built by a page builder; WILL change on a
+#       title: h6.e-n-accordion-item-title-text   # redesign. A zero-row match is
+#       application_url: a[href]                  # reported as an error, not silence.
+#
+#   # A single-opportunity page handled by the existing generic parser.
+#   - name: City of Jacksonville Public Service Grant
+#     source_key: coj-psg
+#     url: https://www.jacksonville.gov/departments/finance/grants-and-compliance/public-service-grants
 #     parser: generic
 #     enabled: false
 #     terms_reviewed: false
 #     selectors:
-#       title: h1
+#       # The page <h1> is "Grants and Contract Compliance Division", which is the
+#       # department, not the program, so title must be set explicitly.
+#       title: .content h2
 #       description: main
-#       eligibility: .eligibility
-#       deadline: time.application-deadline
-#       award_min: .award-min
-#       award_max: .award-max
-#       application_url: a.apply

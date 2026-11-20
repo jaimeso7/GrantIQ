@@ -21,8 +21,13 @@ def create_app(session_factory=SessionLocal, *, enable_scheduler=None):
             ensure_schedule(session)
             from .services.research_context import seed_prospects
             seed_prospects(session)
+            if session_factory is SessionLocal:
+                # Tests use their own databases; only the real one mirrors the local research file.
+                from .services.foundations import sync_prospects
+                sync_prospects(session)
         from .services.scheduler import SearchWorker
-        worker = SearchWorker(session_factory) if (enable_scheduler if enable_scheduler is not None else session_factory is SessionLocal) else None
+        from .services.irs990_schedule import execute as irs990_refresh
+        worker = SearchWorker(session_factory, irs990=irs990_refresh) if (enable_scheduler if enable_scheduler is not None else session_factory is SessionLocal) else None
         if worker:
             worker.start()
         try:
