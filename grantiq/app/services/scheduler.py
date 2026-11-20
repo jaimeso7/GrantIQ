@@ -47,14 +47,17 @@ def schedule_status(session, now=None):
         "errors": latest.errors} if latest else None)}
 
 class SearchWorker:
-    def __init__(self, session_factory, refresh=None, clock=now_utc):
+    def __init__(self, session_factory, refresh=None, clock=now_utc, irs990=None):
         self.factory, self.clock = session_factory, clock
         if refresh is None:
             from ...ingestion import run_refresh
             refresh = run_refresh
         self.refresh = refresh
+        # Monthly 990-PF research refresh, opt-in: callable(session_factory) or None.
+        self.irs990 = irs990
         self.stop_event = threading.Event()
         self.job = None
+        self.irs990_job = None
         self.thread = None
 
     def start(self):
@@ -84,6 +87,14 @@ class SearchWorker:
         if due:
             self.job = threading.Thread(target=self.execute, name="grantiq-recurring-search", daemon=True)
             self.job.start()
+        if self.irs990 and not (self.irs990_job and self.irs990_job.is_alive()):
+            from .irs990_schedule import claim_if_due
+            with self.factory() as session:
+                irs990_due = claim_if_due(session, now)
+            if irs990_due:
+                self.irs990_job = threading.Thread(target=self.irs990, args=(self.factory,),
+                                                   name="grantiq-irs990-refresh", daemon=True)
+                self.irs990_job.start()
 
     def execute(self):
         try:
@@ -112,7 +123,9 @@ class SearchWorker:
                         except Exception:
                             log.exception("Scheduler tick failed; retrying in 30 seconds")
                         self.stop_event.wait(30)
-                    # Retain ownership until an in-flight search completes.
+                    # Retain ownership until an in-flight search completes. A 990
+                    # refresh can take an hour; it is left to finish or be marked
+                    # interrupted and rerun after the next start.
                     if self.job:
                         self.job.join()
                     with self.factory() as session:

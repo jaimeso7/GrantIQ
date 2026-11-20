@@ -108,6 +108,8 @@ def fresh_scores(session):
 
 @router.get("/")
 def dashboard(request: Request):
+    if request.query_params.get("view") == "foundations":
+        return foundations_dashboard(request)
     with session_for(request) as session:
         fresh_scores(session)
         grants = all_grants(session)
@@ -118,6 +120,31 @@ def dashboard(request: Request):
         refresh = session.scalar(select(RefreshRun).order_by(RefreshRun.id.desc()).limit(1))
         modes = {g["assessment"].semantic_mode for g in grants}
         return render(request, "dashboard.html", session, grants=filter_grants(grants, dict(request.query_params)), stats=stats, filters=dict(request.query_params), options=options, refresh=run_dict(refresh), semantic_mode=", ".join(sorted(modes)) or "Not scored yet", staff_hidden_count=sum(bool(g.get("staff_context") and g["staff_context"]["hidden"]) for g in active_grants))
+
+def foundations_dashboard(request: Request):
+    from ..models import FoundationProspect
+    from ..services.foundations import filter_prospects, last_import
+    with session_for(request) as session:
+        everything = session.scalars(select(FoundationProspect)).all()
+        filters = dict(request.query_params)
+        stats = {"total": len(everything), "local": sum(f.tier == 1 for f in everything),
+                 "relevant": sum(bool(f.relevant_count) for f in everything),
+                 "funded_us": sum(bool(f.funded_us or f.received) for f in everything),
+                 "new": sum(bool(f.relevant_count) and not (f.already_funder or f.funded_us or f.declined) for f in everything)}
+        return render(request, "dashboard.html", session, view="foundations", foundations=filter_prospects(session, filters),
+                      stats=stats, filters=filters, cities=sorted({f.city for f in everything if f.city}),
+                      filing_year=everything[0].filing_year if everything else None, imported_at=last_import(session))
+
+@router.get("/foundations/{ein}")
+def foundation_detail(request: Request, ein: str):
+    from ..models import FoundationProspect
+    from ..services.foundations import last_import, method_note
+    with session_for(request) as session:
+        foundation = session.get(FoundationProspect, ein.zfill(9))
+        if foundation is None:
+            raise HTTPException(404, "Foundation not found")
+        return render(request, "foundation.html", session, foundation=foundation, imported_at=last_import(session),
+                      method=method_note())
 
 @router.get("/grants/{grant_id}")
 def detail(request: Request, grant_id: int):
@@ -221,7 +248,8 @@ def sources(request: Request):
         next_terms, _, _ = keyword_plan(get_profile(session), cursor.position if cursor else 0)
         config = [{"name": "Grants.gov", "type": "Official public API", "url": "https://www.grants.gov", "enabled": True, "description": "Public posted and forecasted federal opportunities. A record cap limits each refresh; see activity for incomplete coverage.", "keywords": next_terms}, *(config or [])]
         runs = [run_dict(r) for r in session.scalars(select(RefreshRun).order_by(RefreshRun.id.desc()).limit(30))]
-        return render(request, "sources.html", session, source_configs=config or [], runs=runs, managed_sources=session.scalars(select(ApprovedSource).order_by(ApprovedSource.name)).all())
+        from ..services.irs990_schedule import irs990_status
+        return render(request, "sources.html", session, source_configs=config or [], runs=runs, managed_sources=session.scalars(select(ApprovedSource).order_by(ApprovedSource.name)).all(), irs990=irs990_status(session))
 
 @router.post("/refresh")
 async def refresh(request: Request, background_tasks: BackgroundTasks):
