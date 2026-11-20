@@ -29,7 +29,11 @@ config/search_keywords.json
 *.xls
 *.csv
 # Local funder research: profiles, scoring experiments and their generated output.
-analysis/
+# Only the IRS 990 pipeline's source code is shared; every data file stays local.
+analysis/*
+!analysis/irs990/
+analysis/irs990/*
+!analysis/irs990/*.py
 docs/*
 !docs/public-overview.html
 TEAM-NOTES.md
@@ -38,3 +42,6 @@ MEETING-GUIDE.md
 VERIFICATION.md
 REFACTOR-NOTES.md
 tests/test_document_context.py
+
+# macOS folder metadata
+.DS_Store
